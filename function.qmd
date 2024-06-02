@@ -1,0 +1,47 @@
+---
+title: "函数是什么"
+theme: united
+lang: zh
+toc: true
+toc-depth: 3
+toc-expand: 2
+toc-title: 本页目录
+---
+
+## 函数是功能
+
+$$\mathit{round}(3.1415926) = 3$$ {#eq-func1}
+
+$$\mathit{sqrt}(25) = 5$$ {#eq-func2}
+
+$$\mathit{mean}(\begin{bmatrix} 1 \\ 2 \\ 3 \\ 4 \end{bmatrix}) = 2.5$$ {#eq-func3}
+
+$$\mathit{simplify}(\textbf{憂鬱}) = \textbf{忧郁}$$ {#eq-func4}
+
+$$\mathit{filter}(\textbf{数据}) = \textbf{部分数据}$$ {#eq-func5}
+
+## 函数是动词
+
+-   脏衣服 $\stackrel{\textbf 洗}{\longrightarrow}$ 干净衣服
+-   也就是说，洗(脏衣服) = 干净衣服
+-   这里`洗()`就是一个函数
+
+## 函数是映射
+
+-   脏衣服 $\stackrel{\textbf 洗}{\longrightarrow}$ 干净衣服
+-   脏帽子 $\stackrel{\textbf 洗}{\longrightarrow}$ 干净帽子
+-   $\qquad\qquad\vdots$
+-   $\qquad\qquad\vdots$
+-   脏袜子 $\stackrel{\textbf 洗}{\longrightarrow}$ 干净袜子
+
+$$
+\begin{equation}
+  \begin{bmatrix} 脏衣服 \\ 脏帽子 \\ \vdots \\ 脏袜子 \end{bmatrix}
+  \stackrel{\textbf 洗}{\longrightarrow}
+  \begin{bmatrix} 干净衣服 \\ 干净帽子 \\ \vdots \\ 干净袜子 \end{bmatrix} 
+\end{equation}
+$$ {#eq-cloth}
+
+根据这个式子，可以归纳，`洗()`这个动作（或者说函数）的主要作用是，把脏的东西变干净。
+
+函数的这个性质，对应到了 tidyverse 中的 `map()` 家族函数，用于批量处理。我们会在后续的进阶课程中讲到。

@@ -1,0 +1,117 @@
+---
+theme: united
+lang: zh
+toc: true
+toc-depth: 3
+toc-expand: 2
+toc-title: 本页目录
+number-sections: true
+---
+
+# dplyr 分组
+
+分组可以做很多事情，但最常用的，肯定还是分组统计。
+
+-   `.by` 在函数中分组
+    -   `summarise(..., .by)` 统计[**个别**]{style="color:darkred"}统计量
+    -   `summ(..., .by)` 快速生成[**大量**]{style="color:darkred"}变量的[**多个**]{style="color:darkred"}统计量
+    -   `mutate(..., .by)` 根据分组统计量更改或新建变量
+-   `group_by()` 在函数前构造分组数据
+-   `ungroup()` 取消数据分组
+
+```{r, echo=FALSE}
+# define functions
+source("d:/r/stata-like functions.r")
+```
+
+## `summarise(..., .by)`
+
+```{r}
+#| code-fold: false
+#| error: true
+
+library(tidyverse)
+
+diamonds %>%
+  summarise(
+    price = mean(price),
+    .by = clarity
+  )
+
+diamonds %>%
+  summarise(
+    price = mean(price),
+    .by = c(cut, clarity)
+  )
+```
+
+## `summ(..., .by)`
+
+```{r}
+#| code-fold: false
+#| error: true
+
+diamonds %>%
+  summ(price, .by = clarity)
+
+diamonds %>%
+  summ(price, .by = c(cut, clarity))
+
+diamonds %>%
+  summ(x:z, .by = clarity)
+
+```
+
+## `mutate(..., .by)`
+
+```{r}
+diamonds %>%
+  mutate(
+    price = mean(price),
+    .by = clarity
+  )
+
+diamonds %>%
+  mutate(
+    mean_price = mean(price),
+    .by = clarity
+  )
+
+diamonds %>%
+  mutate(
+    price3g = cut(price, 3),
+    .by = color
+  )
+```
+
+## `group_by()`
+
+```{r}
+#| code-fold: false
+#| error: true
+
+diamonds %>%
+  group_by(cut)
+
+diamonds %>%
+  group_by(cut) %>%
+  summarise(price = mean(price))
+
+diamonds %>%
+  group_by(cut) %>%
+  summ(price)
+
+diamonds %>%
+  group_by(clarity) %>%
+  summ(x:z)
+
+diamonds %>%
+  group_by(cut) %>%
+  summ(price, .by = clarity)
+
+diamonds %>%
+  group_by(color) %>%
+  mutate(
+    price3g = cut(price, 3)
+  )
+```

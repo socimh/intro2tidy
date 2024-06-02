@@ -1,0 +1,69 @@
+---
+theme: united
+lang: zh
+toc: true
+toc-depth: 3
+toc-expand: 2
+toc-title: 本页目录
+number-sections: true
+---
+
+# dplyr 更改或新建
+
+当你添加一个手机号到通讯录，手机会问你是“新建联系人”还是“添加到已有联系人”。这是两个不同的操作。不过，dplyr 的`mutate()`函数，将它们合二为一了。
+
+-   更改变量名
+    -   `rename()` 重命名
+    -   `rename_with()` 批量重命名[（进阶技巧）]{style="color:gray"}
+-   更改或新建列（变量）
+    -   `mutate()` 更改、新建变量
+    -   `fill()` 就近填充缺失值[（进阶技巧）]{style="color:gray"}
+    -   `replace_na()` 批量替换缺失值[（进阶技巧）]{style="color:gray"}
+    -   `rownames_to_column()` 复制行名称为变量[（进阶技巧）]{style="color:gray"}
+    -   `add_count()` 添加变量频数为新变量[（进阶技巧）]{style="color:gray"}
+    -   `unite()` 合并多个变量为一个[（进阶技巧）]{style="color:gray"}
+    -   `separate()等` 拆分一个变量为多个[（进阶技巧）]{style="color:gray"}
+    -   `add_column()` *手动添加变量*[（几乎不用）]{style="color:lightgray"}
+-   更改或新建行（个案）
+    -   `expand()` 和 `complete()` 根据变量取值的组合扩充个案[（进阶技巧）]{style="color:gray"}
+    -   `add_row()` *手动添加变量*[（几乎不用）]{style="color:lightgray"}
+
+## `rename()`
+
+```{r}
+#| code-fold: false
+#| warning: false
+
+library(tidyverse)
+
+# 把 price 改名为 price_usd
+diamonds %>%
+  rename(price_usd = price)
+
+# 把 x, y, z 分别改名为 size_x, size_y, size_z
+diamonds %>%
+  rename(
+    size_x = x,
+    size_y = y,
+    size_z = z
+  )
+```
+
+## `mutate()`
+
+```{r}
+#| code-fold: false
+#| warning: false
+
+# 新建变量 price_rmb，即换算为人民币，假设汇率为7
+diamonds %>%
+  mutate(price_rmb = price * 7)
+
+# 更改变量 price，换算为人民币，假设汇率为7
+diamonds %>%
+  mutate(price = price * 7)
+
+# 新建变量 size，由 x, y, z 相乘而得（不代表钻石真实体积）
+diamonds %>%
+  mutate(size = x * y * z)
+```

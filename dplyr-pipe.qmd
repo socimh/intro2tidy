@@ -1,0 +1,280 @@
+---
+theme: united
+lang: zh
+toc: true
+toc-depth: 3
+toc-expand: 2
+toc-title: 本页目录
+number-sections: true
+---
+
+# magrittr 管道
+
+## `%>%` 定义
+
+在继续讲解 dplyr 函数前，我想介绍一个非常特殊的函数，来自 magrittr 包的管道（pipe）函数 `%>%`。 它的用途是连通函数，美化代码。
+
+它的定义如下
+
+-   `f(a)` 等于 `a %>% f()`
+-   `f(a, b)` 等于 `a %>% f(b)`
+-   `f(a, b, c, ...)` 等于 `a %>% f(b, c, ...)`
+
+比方说，`names(diamonds)` 等于 `diamonds %>% names()`。
+
+::: callout-warning
+## 警告
+
+从下一章开始，为了帮助大家养成习惯，我会把几乎所有的函数都写成管道 `%>%` 的形式。
+:::
+
+## `%>%` 优点
+
+为什么要多此一举呢？在数据分析中，我们通常要用到大量的函数，比如我们要对一头牛做复杂的处理：
+
+**【错误】写法一**
+
+```{r}
+#| eval: false
+#| error: true
+
+吃(蘸(涮(挤(捶打(切(宰(牛))), 成丸), 牛骨清汤), 沙茶))
+```
+
+**【错误】写法二**
+
+```{r}
+#| eval: false
+#| error: true
+
+吃(
+  蘸(
+    涮(
+      挤(
+        捶打(
+          切(
+            宰(牛)
+          )
+        ), 成丸
+      ), 牛骨清汤
+    ), 沙茶
+  )
+)
+```
+
+**【正确】写法三（使用管道）**
+
+```{r}
+#| eval: false
+#| error: true
+
+牛 %>%
+  宰() %>%
+  切() %>%
+  捶打() %>%
+  挤(成丸) %>%
+  涮(牛骨清汤) %>%
+  蘸(沙茶) %>%
+  吃()
+```
+
+第三种写法，明显更自然，更清晰。原来这一系列函数，把牛变成了手打牛肉丸，下清汤锅，蘸沙茶酱，填了肚子——想必是在潮汕地区吃的。
+
+
+::: callout-tip
+## 提示
+
+当我们有连续多个函数连在一起的时候，`%>%` 能让代码更加整洁、易读。
+:::
+
+## `%>%` 范例
+
+任务：先把 price 放到开头，再对它降序排列（从高到低）
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+
+library(tidyverse)
+```
+
+```{r}
+#| eval: false
+
+# 【错误】写法一
+arrange(relocate(diamonds, price), -price)
+
+# 【错误】写法二
+arrange(
+  relocate(diamonds, price),
+  -price
+)
+```
+
+```{r}
+# 【正确】写法三，整洁、清晰、易读
+diamonds %>%
+  relocate(price) %>%
+  arrange(-price)
+```
+
+## `%>%` 和 `|>`
+
+在 R 4.1 的版本及以后，R 推出了所谓的自然管道（natural pipe）`|>`。它有三个优点，
+
+1. 比较简洁，仅使用了两个字符；
+2. 和 Julia 等编程语言统一了语法；
+3. 随时可用，使用前不需要导入 tidyverse, dplyr 或 magnittr 包。
+
+鉴于上述优点，甚至 tidyverse 的奠基人 Hadley Wickham 都改用了 `|>`，几乎抛弃了 `%>%`。但是需要注意，`|>`也有很多缺点，具体什么我就不赘述了，你们以后遇到了自然知道。
+
+就我个人习惯而言，我还是用 `%>%` 更多一点。而且我也更推荐初学者用 `%>%`，因为它更简单、更少报错。
+
+
+## 为所欲为 {#sec-wei}
+
+我们已经学了一些 `dplyr` 函数。可以发现，几乎所有 `dplyr` 函数输入和输出的格式都是 tibble，这是一个非常精妙的设计。
+
+::: {layout-ncol=2}
+![普通的成语接龙](fig/word_chain_short.png){#fig-short}
+
+![“为所欲为”的成语接龙](fig/word_chain_long.png){#fig-long}
+:::
+
+@sec-chengyu 说到，想要学会成语接龙，学“为所欲为”是最省时省力的。同理，
+
+::: callout-note
+## 笔记
+1. 使用 dplyr 函数，初学者可以“为所欲为”地处理 tibble。
+2. dplyr 函数非常适配管道函数 `%>%`。
+:::
+
+下面是一个简单的证明：
+
+```{r}
+#| code-fold: true
+#| warning: false
+
+# 定义识别函数
+read_object <- function(object) {
+  input <- substitute(object) %>%
+    as.character()
+  type <- type_sum(object) %>%
+    as.character() %>%
+    str_extract("^\\w+")
+
+  judgement <- str_glue(
+    "{input} 的类型是 {type}。"
+  )
+  return(judgement)
+}
+```
+
+```{r}
+#| code-fold: false
+#| warning: false
+read_object(diamonds) # 识别 diamonds
+```
+
+```{r}
+diamonds2 <- diamonds %>%
+  relocate(price)
+
+read_object(diamonds2) # 识别 diamonds2
+```
+
+::: callout-tip
+## 提示
+`relocate()` 输入 diamonds，输出 diamonds2，二者都是 tibble。
+:::
+
+```{r}
+diamonds3 <- diamonds2 %>%
+  arrange(-price)
+
+read_object(diamonds3) # 识别 diamonds3
+```
+
+::: callout-tip
+## 提示
+同样，`arrange()` 输入 diamonds2，输出 diamonds3，二者都是 tibble。
+:::
+
+
+<!-- 下面是一些反例：
+
+```{r}
+diamonds2 <- dim(diamonds)
+read_object(diamonds2)
+
+diamonds2 <- object.size(diamonds)
+read_object(diamonds2)
+
+diamonds2 <- ggplot(diamonds)
+read_object(diamonds2)
+```
+
+上面这些函数都有各自的作用，但是它们不是 dplyr 函数，所以生成的不是 tibble。因此，它们通常只能作为管道的结尾。
+
+总之，我们作为初学者，只需要熟悉 tibble 就好了。不管来自哪里、什么格式的数据，都可以先转换成 tibble；在 dplyr 的为所欲为之后，也可以输出成各种格式的表格和图片。 -->
+
+值得一提的是，tidyverse 底下的其他包，通常也有“为所欲为”的性质：
+
+```{=html}
+<style>
+    tr {
+        text-align: center;
+    }
+</style>
+
+<table>
+  <thead>
+    <tr style="border-top:2px solid black;
+      border-bottom:1px solid black">
+      <th></th>
+      <th>对象</th>
+      <th>函数</th>
+      <td>例子</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <td>成语接龙</td>
+    <td>“为”</td>
+    <td>特定成语</td>
+    <td>“为所欲为”</td>
+    </tr>
+    <tr>
+    <td>数据</td>
+    <td>tibble</td>
+    <td>dplyr 函数</td>
+    <td>arrange(), relocate() 等</td>
+    </tr>
+    <tr>
+    <td>图形</td>
+    <td>gg</td>
+    <td>ggplot 函数</td>
+    <td>geom_col(), ggtitle() 等</td>
+    </tr>
+    <tr>
+    <td>文本变量</td>
+    <td>character</td>
+    <td>部分 stringr 函数</td>
+    <td>str_replace(), str_extract() 等</td>
+    </tr>
+    <tr>
+    <td>类别变量</td>
+    <td>factor</td>
+    <td>部分 forcats 函数</td>
+    <td>fct_reorder(), fct_recode() 等</td>
+    </tr>
+    <tr style="border-bottom:2px solid black">
+    <td>列表</td>
+    <td>list</td>
+    <td>部分 purrr 函数</td>
+    <td>map(), map2() 等</td>
+    </tr>
+  </tbody>
+</table>
+```

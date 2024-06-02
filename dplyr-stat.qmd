@@ -1,0 +1,258 @@
+---
+theme: united
+lang: zh
+toc: true
+toc-depth: 3
+toc-expand: 2
+toc-title: 本页目录
+number-sections: true
+---
+
+# dplyr 统计
+
+-   类别变量
+    -   `count()` 计算各类别数量
+    -   `statart::tab()` 计算各类别数量、[**百分比、累计百分比**]{style="color:darkred"}
+    -   `statart::tab1()` 同时列出[**多个**]{style="color:darkred"}变量的上述统计量
+-   连续变量
+    -   `summarise()` 统计[**个别**]{style="color:darkred"}统计量
+    -   `statart::summ()` 快速生成[**大量**]{style="color:darkred"}变量的[**多个**]{style="color:darkred"}统计量
+  
+
+## `count()`
+
+```{r}
+#| code-fold: false
+#| warning: false
+
+library(tidyverse)
+
+# 显示每一类的数量
+diamonds %>%
+  count(cut)
+```
+
+## `tab()` 和 `tab1()`
+
+::: callout-caution
+## 注意
+
+这两个函数来自于我正在开发的 statart 包，暂时只能通过 `source()` 函数调用。
+:::
+
+```{r, echo=FALSE}
+# Define functions
+source("D:/R/Stata-like Functions.R")
+```
+
+```{r, echo = FALSE}
+#| code-fold: false
+#| error: TRUE
+
+# diamonds %>%
+#   fre(cut)
+
+# diamonds %>%
+#   fre(cut, clarity)
+```
+
+```{r}
+#| code-fold: false
+#| error: TRUE
+
+# 在 count() 的基础上，多了很多信息
+diamonds %>%
+  tab(cut)
+
+# 自动转换成列联表
+diamonds %>%
+  tab(cut, clarity)
+
+# 同时 tab1() 多个变量
+diamonds %>%
+  tab1(cut:clarity)
+
+# 同时 tab1() 多个变量，并返回成一个数据
+diamonds %>%
+  tab1(cut:clarity, .append = TRUE)
+```
+
+
+## `summarise()`
+
+```{r}
+#| code-fold: false
+#| error: TRUE
+
+# 平均钻石价格
+diamonds %>%
+  summarise(mean(price))
+
+# 指定变量名
+diamonds %>%
+  summarise(price = mean(price))
+```
+
+```{r, echo=FALSE, eval=FALSE}
+diamonds %>%
+  summarise(
+    mean_price = mean(price),
+    mean_x = mean(x),
+    mean_y = mean(y),
+    mean_z = mean(z)
+  )
+
+#
+diamonds %>%
+  summarise(
+    min = min(price),
+    q1 = quantile(price, .25),
+    mean = mean(price),
+    median = median(price),
+    sd = sd(price),
+    q3 = quantile(price, .75),
+    max = max(price)
+  )
+```
+
+
+## `summ()`
+
+为了解决 `summarise()` 太原始的问题，我尽可能兼顾简便和实用，设计了一个新的函数 `summ()`。下面我来演示一些基础功能：
+
+::: callout-caution
+## 注意
+
+这个函数来自于我正在开发的 statart 包，暂时只能通过 `source()` 函数调用。
+:::
+
+```{r}
+#| code-fold: false
+#| error: true
+
+# 统计 price 的变量类型、非缺失数、类别数、均值、标准差、最小值和最大值
+diamonds %>%
+  summ(price)
+```
+
+解释一下上面的统计量：
+
+- `variable` 是变量名
+- `type` 是变量类型（如变量有单位，则为单位）
+- `n` 是该变量非缺失值的数量
+- `unique` 是变量的类别数（有多少个不重复的取值）
+  - 显然，`unique` $\leq$ `n`
+  - `unique` 越大，意味着这个变量越“连续”，信息越丰富
+  - 比方说，**年龄**一般是0-120之间的某个正整数，而相应**月龄**的数量是年龄的12倍，**日龄**尤甚。所以在这三个变量里，**日龄**一般最平滑、最连续，信息量最大，相应的 `unique` 数也最大。
+- `mean` 是均值
+- `sd` 是标准差
+- `min` 是最小值
+- `max` 是最大值
+
+```{r}
+#| code-fold: false
+#| error: true
+
+# 同时统计多个变量
+diamonds %>%
+  summ(x:z)
+
+```
+
+在 x, y, z 这三个维度上，钻石的 z（高度）最小，而 x 和 y 的均值几乎一样。
+
+```{r}
+# 展示所有统计量
+diamonds %>%
+  summ(x:z, .detail = TRUE) %>%
+  print(width = Inf)
+```
+
+可以看到，其实 x 和 y 在四分位数（q1 和 q3）上没有什么差别，但是它们的最大值（max）、偏度（skew）和峰度（kurtosis）上相差很多。我猜想，对于一些不规则的钻石，可能会把短边选为 x，而长边选为 y。
+
+```{r}
+# 自己选择一些统计量
+diamonds %>%
+  summ(x:z, .stat = c("valid_pct", "mean", "se"))
+```
+
+valid_pct 表示非缺失值的比例，这里为1，说明完全无缺失。se 是标准误，也就是对均值的误差估计。
+
+```{r}
+# 一次性选择所有变量
+diamonds %>%
+  summ(everything())
+```
+
+请注意，因为 cut, color, clarity 都是定序变量，所以 `summ()` 它们比较牵强。对它们使用前文的 `tab1()` 会更为合适。
+
+<!-- 下面我想用一个更复杂的数据来体现 `summ()` 的强大之处。 -->
+
+```{r, echo=FALSE}
+#| error: true
+complex_tb <- tibble(
+  date = as.Date("2024-02-09") - 1:1000,
+  time = as_datetime("2024-02-09 12:00:00") - 1:1000,
+  duration1 = as_datetime("2024-02-09 12:00:00") -
+    as_datetime("2024-02-09 10:00:00") + 1:1000,
+  duration2 = hms::as_hms("12:34:56"),
+  string = "ABC",
+  logical = rep(c(TRUE, FALSE), 500),
+  unit1 = units::set_units(1:1000, "m"),
+  unit2 = units::set_units(1:1000, "m^2"),
+  factor = factor(rep(letters[1:2], 500)),
+  order = factor(rep(letters[1:2], 500),
+    ordered = TRUE
+  ),
+  double = 1:1000 / 10,
+  integer = 1:1000L,
+  half_miss = if_else(
+    1:1000 %% 2 == 1,
+    1:1000, NA_real_
+  ),
+  all_miss = NA_real_
+)
+
+complex_tb %>%
+  glimpse()
+```
+
+<!-- 通过 `glimpse()` 可以看到，这个数据非常复杂，几乎囊括了常见的各种数据类型。让我们来 `summ()` 一下这个数据： -->
+
+```{r}
+complex_tb %>%
+  codebook()
+```
+
+```{r}
+complex_tb %>%
+  summ(everything())
+
+```
+
+<!-- 小结一下，可以划分出三大类变量，分别是
+
+- `summ()` 无法统计
+  - 无法转换成数值的变量，如 string（建议使用`tab1()`）
+  - 日期时间类变量，如 date 和 datetime（建议使用`summ_date()`）
+  - 全部缺失的变量，如 all_miss
+- `summ()` 可以统计，但结果通常无意义
+  - 类别型变量，如 factor 和 order（建议使用`tab1()`）
+- `summ()` 可以统计，且结果有意义
+  - 数值型变量，如 double 和 integer
+  - 含单位的数值变量，如 unit1 和 unit2
+  - 时间区间变量，如 duration1 和 duration2
+  - 逻辑型变量（虚拟变量），如 logical -->
+
+```{r, echo=FALSE, eval=FALSE}
+#| code-fold: false
+#| warning: false
+
+# 其他包
+complex_tb %>%
+  skimr::skim() %>%
+  as_tibble()
+
+complex_tb %>%
+  psych::describe()
+```

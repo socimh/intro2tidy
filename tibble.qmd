@@ -1,0 +1,201 @@
+---
+title: "tibble 数据"
+theme: united
+lang: zh
+toc: true
+toc-depth: 3
+toc-expand: 2
+toc-title: 本页目录
+---
+
+## 整洁数据
+
+在浩如烟海的数据类型中，有一种数据类型特别为统计学家所关注。这一类数据有如下特点：
+
+1.  每行是一个个案（case）、个体（individual）、观测点（observation）、分析单位（unit of analysis）
+    -   统计上讲，这些概念等价
+2.  每列是一个变量（variable）、特征（feature）
+3.  每格是一个取值（value），即某个个案的某条特征
+
+这一类数据，有一种说法是整洁数据（tidy data），和其他五花八门的杂乱数据（messy data）相对。
+
+整洁数据的结构非常清晰，通过行和列，可以锁定每个格子数值的含义。
+
+下面是一些整洁数据的示例：
+
+```{r, echo=FALSE}
+#| code-fold: true
+#| warning: false
+
+library(magrittr)
+
+dplyr::starwars %>%
+  head() %>%
+  dplyr::select(1:8) %>%
+  knitr::kable(caption = "一、starwars 星球大战角色数据（87行，14列）")
+
+tidyr::billboard %>%
+  head() %>%
+  dplyr::select(1:8) %>%
+  knitr::kable(caption = "二、billboard 歌曲榜单数据（79行，317列）")
+
+ggplot2::diamonds %>%
+  head() %>%
+  knitr::kable(caption = "三、diamonds 钻石数据（53940行，10列）")
+```
+
+
+## `tidyverse`
+
+本文是对 tidyverse 的入门介绍。
+
+tidyverse （直译为\`\`整洁宇宙''）整合了一系列主要处理、分析整洁数据的R包（R packages）。每个包里面都有大量的函数。其特点是函数的命名、语法、用法非常整洁统一。
+
+```{r}
+#| code-fold: false
+# 加载 tidyverse 包
+library(tidyverse)
+```
+
+::: {.callout-tip}
+## 提示
+
+在载入 tidyverse 时，可能会出现类似上面的一些警告语，它们不会影响 tidyverse 的正常使用，请无须担心。
+:::
+
+tidyverse 为整洁数据设计了一种数据格式，叫作 tibble。这个词是 tidy 和 table 的结合，顾名思义，特指整洁数据。它相当于Excel里的表格（整洁的才行）、Stata 里的数据、Python 里的 Pandas 数据框等。
+
+**在数据科学中，整洁数据是最主流的数据形式。**尽管我们日常生活中，可以看到形形色色的数据呈现形式（比如12306列车时间表、网购的商品列表等），但是它们的底层数据都是很整洁的。
+
+
+## 打印 `tibble`
+
+在接下来的几章，我将以 **diamonds 钻石数据**为示例数据。
+
+```{r}
+#| code-fold: false
+#| warning: false
+
+diamonds # 打印数据
+```
+
+在R的界面中，tibble 数据的输出格式会像上面这样。从上到下，
+
+-   `# A tibble: 10 × 10` 表示当前 tibble 共有10行、10列
+-   `carat cut ...` 这一行是变量名
+-   `<dbl> <ord> ...` 这一行是变量类型，比如
+    -   数值型（`<dbl>`）
+    -   整数型（`<int>`）
+    -   有序类别型（`<ord>`）
+-   `1  1.5  Very Good` 从这一行开始，都是钻石的具体数据了
+    -   `1`为行号，其他均为这颗钻石的参数
+
+如果你的 tibble 比较大，有很多行、很多列，tibble 在打印时会自动帮你隐藏多余的行和列，比方说
+
+```{r}
+#| code-fold: false
+#| warning: false
+
+starwars
+```
+
+在这里，
+
+-   `# ℹ 77 more rows` 表示省略了77行
+-   `# ℹ 5 more variables: homeworld <chr>, ...` 表示省略了5个变量，并列出了省略的变量名、变量类型
+
+请注意，这里打印时省略的变量和个案，不影响数据本身的完整。
+
+## 列的性质
+
+从上面可以看到，同样省略了一些行和列，tibble 打印了变量名、变量类型等信息，却丝毫不介绍省略的其他个案。这是为什么呢？
+
+在整洁数据中，相对于行，列（变量）有一些特殊的性质：
+
+1.  每一列都有名称（变量名）
+    -   姓名是 `name`
+    -   身高是 `height`
+2.  每一列只能储存同种类型的数值，不能“混搭”，比方说
+    -   姓名是文本型（`chr`）
+    -   身高是整数型（`int`）
+3.  每一列都可以统计
+    -   A开头姓名的比例（约`5.7%`）
+    -   身高高于170吗？
+
+```{r}
+#| code-fold: true
+#| warning: false
+
+# 仅供参考，不需要掌握
+starwars %>%
+  summarise(
+    percentage = sprintf(
+      "%.1f%%",
+      mean(str_detect(name, "^A")) * 100
+    )
+  )
+```
+
+这里统计了A开头姓名的比例约为`5.7%`。
+
+```{r}
+#| code-fold: true
+#| warning: false
+
+# 仅供参考，不需要掌握
+starwars %>%
+  transmute(
+    height,
+    `height > 170` = height > 170
+  )
+```
+
+这里判断了各个角色的身高有没有高于170，判断结果为`TRUE`或`FALSE`。
+
+整理成表格如下：
+
+```{=html}
+
+<style>
+    tr {
+        text-align: center;
+    }
+</style>
+
+<table>
+  <thead>
+    <tr style="border-top:2px solid black;
+      border-bottom:1px solid black">
+      <th>列（变量）</th>
+      <th>行（个案）</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <td>必须起名（具名性）</td>
+    <td>不需要</td>
+    </tr>
+    <tr>
+    <td>一定同类（同质性）</td>
+    <td>不一定</td>
+    </tr>
+    <tr style="border-bottom:2px solid black">
+    <td>可以统计（算术性）</td>
+    <td>不可以</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+## 列的类型
+
+列，或者``变量''，在 R 里面用向量（矢量，vector）来存储。下面介绍一些常见的变量类型：
+
+1. 数值型（numeric），包括实数型（double, real）和整数型（integer）
+2. 逻辑型（logical），包括 TRUE 和 FALSE
+3. 字符型（character），包括各种长度的文本
+4. 类别型（factor）、标签型（haven label），通常是数值型变量加上标签
+5. 日期型（date）、日期时间型（datetime），本质是数值型
+6. 几何型（geometry），来自 sf 包，包括点、线、面等，用于空间分析和画图
+7. 其他一维对象
+8. 二维乃至多维对象，比如一列 tibbles，每个单元格存储一个 tibble

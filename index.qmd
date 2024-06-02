@@ -1,0 +1,33 @@
+---
+author: 沈明宏
+institute: 香港科技大学
+date: today
+date-format: YYYY年M月D日
+theme: united
+lang: zh
+toc: true
+toc-depth: 3
+toc-expand: 2
+toc-title: 本页目录
+number-sections: true
+---
+
+# 前言 {.unnumbered}
+
+这是香港科技大学博士候选人沈明宏（mhshenaa\@connect.ust.hk）建立的R语言教程，欢迎大家阅读。
+
+本教程为2024年香港科技大学（广州）的《R 语言 tidyverse 入门》暑期工作坊做了一些调整。
+
+工作坊的当前日程安排如下：
+
+1. 6月4日 （前言，第1-3章）工作坊概览；介绍 R, tidyverse, tibble 和 statart；如何导入、探索、导出数据等
+2. 6月11日 使用 dplyr 和 statart 清理数据
+3. 6月18日 使用 ggplot 和 statart 等跑回归及可视化  
+4. 6月25日 使用 stringr 处理文本数据及可视化  
+5. 7月2日 使用 forcats 处理类别数据及可视化，使用 lubridate 等处理时间数据
+6. 7月9日 使用 tidyr 和 dplyr 等处理复杂数据及可视化
+7. 7月23日 使用 purrr 处理高维度数据及可视化
+8. 8月6日 回归模型与可视化的高级技巧
+9.  8月13日 使用 sf 和 stars 等处理空间数据及可视化
+10. 如有时间：使用 officer 等自动编辑文档
+11. 如有时间：使用 tidygraph 和 ggraph 处理网络数据

@@ -1,0 +1,20 @@
+{
+  "hash": "e53556adb2fa4afba74e08972e9061c6",
+  "result": {
+    "markdown": "---\ntheme: united\nlang: zh\ntoc: true\ntoc-depth: 3\ntoc-expand: 2\ntoc-title: 本页目录\nnumber-sections: true\n---\n\n\n\n# dplyr 统计\n\n## `count()`\n\n\n\n::: {.cell}\n\n```{.r .cell-code  code-fold=\"false\"}\nlibrary(tidyverse)\n\n# \ndiamonds %>%\n  count(cut)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n# A tibble: 5 x 2\n  cut           n\n  <ord>     <int>\n1 Fair       1610\n2 Good       4906\n3 Very Good 12082\n4 Premium   13791\n5 Ideal     21551\n```\n:::\n\n```{.r .cell-code  code-fold=\"false\"}\n# \ndiamonds %>%\n  count(clarity)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n# A tibble: 8 x 2\n  clarity     n\n  <ord>   <int>\n1 I1        741\n2 SI2      9194\n3 SI1     13065\n4 VS2     12258\n5 VS1      8171\n6 VVS2     5066\n7 VVS1     3655\n8 IF       1790\n```\n:::\n:::\n\n\n\n## `summarise()`\n\n\n\n::: {.cell}\n\n```{.r .cell-code  code-fold=\"false\"}\n# \ndiamonds %>%\n  summarise(\n    mean_price = mean(price), \n    mean_x = mean(x),\n    mean_y = mean(y),\n    mean_z = mean(z)\n  )\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n# A tibble: 1 x 4\n  mean_price mean_x mean_y mean_z\n       <dbl>  <dbl>  <dbl>  <dbl>\n1      3933.   5.73   5.73   3.54\n```\n:::\n\n```{.r .cell-code  code-fold=\"false\"}\n# \ndiamonds %>%\n  summarise(\n    min = min(price),\n    Q1 = quantile(price, .25),\n    mean = mean(price),\n    median = median(price), \n    sd = sd(price),\n    Q3 = quantile(price, .75),\n    max = max(price)\n  )\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n# A tibble: 1 x 7\n    min    Q1  mean median    sd    Q3   max\n  <int> <dbl> <dbl>  <dbl> <dbl> <dbl> <int>\n1   326   950 3933.   2401 3989. 5324. 18823\n```\n:::\n\n```{.r .cell-code  code-fold=\"false\"}\n# 【我】这部分留到进阶课程吧。\nlibrary(skimr)\ndiamonds %>%\n  skim(price) %>%\n  as_tibble() %>%\n  rename_with(~ str_remove_all(.x, \"^(skim_|numeric\\\\.)\")) %>%\n  print(width = Inf)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n# A tibble: 1 x 12\n  type    variable n_missing complete_rate  mean    sd    p0   p25   p50   p75\n  <chr>   <chr>        <int>         <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>\n1 numeric price            0             1 3933. 3989.   326   950  2401 5324.\n   p100 hist \n  <dbl> <chr>\n1 18823 ▇▂▁▁▁\n```\n:::\n:::\n",
+    "supporting": [
+      "dplyr-stat_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {
+      "knitr": [
+        "{\"type\":\"list\",\"attributes\":{},\"value\":[]}"
+      ]
+    },
+    "preserve": null,
+    "postProcess": false
+  }
+}

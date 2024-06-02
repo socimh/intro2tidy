@@ -1,0 +1,113 @@
+---
+theme: united
+lang: zh
+toc: true
+toc-depth: 3
+toc-expand: 2
+toc-title: 本页目录
+number-sections: true
+---
+
+# dplyr 浏览
+
+-   浏览数据
+    -   `print()` 展示数据的[**前面几列**]{style="color:darkred"}、前面几行
+    -   `s_print()` 展示数据的前面几列、[**首尾几行**]{style="color:darkred"}
+    -   `glimpse()` 展示数据[**每一列**]{style="color:darkred"}的前面几行
+    -   `view()` 打开类似 Excel 的界面，查看[**整个数据**]{style="color:darkred"}的表格
+-   浏览变量
+    -   `names()` 和 `names_as_column()` 浏览变量名
+    -   `codebook()` 查看变量标签和概要
+
+## `print()`
+
+当你键入一个对象，而不对它进行任何操作时，R 会自动帮你套上一个 `print()` 函数。请看下面的例子：
+
+```{r}
+#| code-fold: false
+#| warning: false
+
+1 + 1
+
+print(1 + 1)
+```
+
+同理，我们阅读 diamonds 的时候，其实是看它打印出来的样子：
+
+```{r}
+#| code-fold: false
+#| warning: false
+
+library(tidyverse)
+
+diamonds
+
+print(diamonds)
+```
+
+所以，我们通常不会主动使用 `print()`。但是，我们在很多时候用到了这个函数。
+
+我们还可以用 statart 包的 `sprint()` 函数，它可以打印一个数据的开头几行和结尾几行：
+
+```{r}
+#| code-fold: false
+#| warning: false
+library(statart)
+
+s_print(diamonds)
+
+s_print(diamonds, n = 10)
+```
+
+## `names()`
+
+```{r}
+#| code-fold: false
+#| warning: false
+
+library(tidyverse)
+
+# 罗列变量名
+names(diamonds)
+```
+
+## `glimpse()`
+
+```{r}
+#| code-fold: false
+#| warning: false
+
+# 浏览变量列表，以及开头的若干个案
+glimpse(diamonds)
+```
+
+## `view()`
+
+```{r, eval=FALSE}
+#| code-fold: false
+#| warning: false
+
+# 打开 Excel 式的数据表
+view(diamonds)
+```
+
+这里因为条件的限制无法演示，就在下面贴一些截图吧。大家可以在自己的 RStudio 里面运行代码，尝试一下。
+
+![打开 viewer 界面](fig/view1.png){#fig-view1}
+
+![搜索 “1000”](fig/view2.png){#fig-view2}
+
+![根据 price 降序](fig/view3.png){#fig-view3}
+
+
+## `codebook()`
+
+```{r}
+#| code-fold: false
+#| warning: false
+library(statart)
+
+# 查看变量基本信息
+codebook(diamonds)
+
+```

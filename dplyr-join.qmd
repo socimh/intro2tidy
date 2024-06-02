@@ -1,0 +1,100 @@
+---
+theme: united
+lang: zh
+toc: true
+toc-depth: 3
+toc-expand: 2
+toc-title: 本页目录
+number-sections: true
+---
+
+# dplyr 合并
+
+-   上下合并
+    -   `bind_rows()` 根据位置垂直拼接
+-   左右合并
+    -   `bind_cols()` 根据位置水平拼接
+    -   `left_join()` 根据ID变量匹配，同时只保留[**前一个数据**]{style="color:darkred"}的个案
+    -   `right_join()` 根据ID变量匹配，同时只保留[**后一个数据**]{style="color:darkred"}的个案
+    -   `full_join()` 根据ID变量匹配，同时保留前后数据的[**所有**]{style="color:darkred"}个案
+    -   `inner_join()` 根据ID变量匹配，同时保留前后数据的[**共同**]{style="color:darkred"}个案
+-   假装合并，实为筛选（删除）
+    -   `semi_join()` 根据ID变量匹配，[**筛选**]{style="color:darkred"}前一个数据中，和后一个数据的[**共同**]{style="color:darkred"}个案
+    -   `anti_join()` 根据ID变量匹配，[**删除**]{style="color:darkred"}前一个数据中，和后一个数据的[**共同**]{style="color:darkred"}个案
+
+## `bind_rows()`
+
+```{r}
+#| code-fold: true
+#| warning: false
+
+library(tidyverse)
+
+tb <- starwars %>%
+  select(1:5) %>%
+  slice(1:6)
+
+tb1 <- tb %>%
+  slice(1:3)
+
+tb2 <- tb %>%
+  slice(4:6)
+```
+
+
+```{r}
+tb1
+tb2
+
+bind_rows(tb1, tb2)
+```
+
+## `bind_cols()`
+
+```{r}
+#| code-fold: true
+#| warning: false
+
+tb1 <- tb %>%
+  select(1:3)
+tb2 <- tb %>%
+  select(4:5)
+```
+
+```{r}
+tb1
+tb2
+
+bind_cols(tb1, tb2)
+```
+
+## `left_join()`
+
+```{r}
+#| code-fold: false
+#| error: true
+
+tb1 %>%
+  left_join(tb2)
+
+```
+
+```{r}
+tb2 <- tb %>%
+  select(c(1, 4:5))
+```
+
+```{r}
+#| code-fold: false
+#| error: true
+
+tb1
+tb2
+
+tb1 %>%
+  left_join(tb2)
+
+tb1 %>%
+  left_join(tb2, by = "name")
+
+```

@@ -1,0 +1,50 @@
+{
+  "index.qmd": {
+    "index.html": "6209b293"
+  },
+  "intro.qmd": {
+    "intro.html": "9646ef4f"
+  },
+  "summary.qmd": {
+    "summary.html": "f7d44202"
+  },
+  "references.qmd": {
+    "references.html": "e8eb1ca8"
+  },
+  "tibble.qmd": {
+    "tibble.html": "5516b8b0"
+  },
+  "function.qmd": {
+    "function.html": "2045b39b"
+  },
+  "dplyr.qmd": {
+    "dplyr.html": "3915c7db"
+  },
+  "dplyr-sort.qmd": {
+    "dplyr-sort.html": "c8fecd77"
+  },
+  "dplyr-select.qmd": {
+    "dplyr-select.html": "d69ffe06"
+  },
+  "dplyr-skim.qmd": {
+    "dplyr-skim.html": "d5df4c39"
+  },
+  "dplyr-mutate.qmd": {
+    "dplyr-mutate.html": "144fa379"
+  },
+  "dplyr-join.qmd": {
+    "dplyr-join.html": "2951b388"
+  },
+  "dplyr-stat.qmd": {
+    "dplyr-stat.html": "e00388f8"
+  },
+  "dplyr-group.qmd": {
+    "dplyr-group.html": "dd39c260"
+  },
+  "dplyr-pipe.qmd": {
+    "dplyr-pipe.html": "5696c004"
+  },
+  "import.qmd": {
+    "import.html": "d911d18c"
+  }
+}

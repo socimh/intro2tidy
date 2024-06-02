@@ -1,0 +1,20 @@
+{
+  "hash": "590634e3552d47d31cdadc0a408b24da",
+  "result": {
+    "markdown": "---\ntheme: united\nlang: zh\ntoc: true\ntoc-depth: 3\ntoc-expand: 2\ntoc-title: 本页目录\nnumber-sections: true\n---\n\n\n\n# dplyr 浏览\n\n## `names()`\n\n\n\n::: {.cell}\n\n```{.r .cell-code  code-fold=\"false\"}\nlibrary(tidyverse)\n\n# 罗列变量名\ndiamonds %>%\n  names()\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n [1] \"carat\"   \"cut\"     \"color\"   \"clarity\" \"depth\"   \"table\"   \"price\"  \n [8] \"x\"       \"y\"       \"z\"      \n```\n:::\n:::\n\n\n\n## `glimpse()`\n\n\n\n::: {.cell}\n\n```{.r .cell-code  code-fold=\"false\"}\n# 浏览变量列表，以及开头的若干个案\ndiamonds %>%\n  glimpse()\n```\n\n::: {.cell-output .cell-output-stdout}\n```\nRows: 53,940\nColumns: 10\n$ carat   <dbl> 0.23, 0.21, 0.23, 0.29, 0.31, 0.24, 0.24, 0.26, 0.22, 0.23, 0.~\n$ cut     <ord> Ideal, Premium, Good, Premium, Good, Very Good, Very Good, Ver~\n$ color   <ord> E, E, E, I, J, J, I, H, E, H, J, J, F, J, E, E, I, J, J, J, I,~\n$ clarity <ord> SI2, SI1, VS1, VS2, SI2, VVS2, VVS1, SI1, VS2, VS1, SI1, VS1, ~\n$ depth   <dbl> 61.5, 59.8, 56.9, 62.4, 63.3, 62.8, 62.3, 61.9, 65.1, 59.4, 64~\n$ table   <dbl> 55, 61, 65, 58, 58, 57, 57, 55, 61, 61, 55, 56, 61, 54, 62, 58~\n$ price   <int> 326, 326, 327, 334, 335, 336, 336, 337, 337, 338, 339, 340, 34~\n$ x       <dbl> 3.95, 3.89, 4.05, 4.20, 4.34, 3.94, 3.95, 4.07, 3.87, 4.00, 4.~\n$ y       <dbl> 3.98, 3.84, 4.07, 4.23, 4.35, 3.96, 3.98, 4.11, 3.78, 4.05, 4.~\n$ z       <dbl> 2.43, 2.31, 2.31, 2.63, 2.75, 2.48, 2.47, 2.53, 2.49, 2.39, 2.~\n```\n:::\n:::\n\n\n\n## `view()`\n\n\n\n::: {.cell}\n\n```{.r .cell-code  code-fold=\"false\"}\n# 打开 Excel 式的数据表（无法在这里 演示）\ndiamonds %>%\n  view()\n```\n:::\n\n\n\n这里因为条件的限制，无法演示。大家可以在自己的 R 里面运行代码，尝试一下。\n",
+    "supporting": [
+      "dplyr-skim_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {
+      "knitr": [
+        "{\"type\":\"list\",\"attributes\":{},\"value\":[]}"
+      ]
+    },
+    "preserve": null,
+    "postProcess": false
+  }
+}

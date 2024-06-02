@@ -1,0 +1,37 @@
+project:
+  type: book
+
+book:
+  title: "tidyverse 入门"
+  search: true
+  downloads: [pdf, epub]
+  # sharing: [link]
+  chapters:
+    - index.qmd
+    - tibble.qmd
+    - function.qmd
+    - part: "dplyr 基础"
+      chapters:
+        - dplyr-skim.qmd
+        - dplyr-sort.qmd
+        - dplyr-select.qmd
+        - dplyr-mutate.qmd
+        - dplyr-stat.qmd
+        - dplyr-group.qmd
+        - dplyr-join.qmd
+        - dplyr-pipe.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: united
+  pdf:
+    documentclass: ctexbook
+    lang: zh
+    keep-tex: true
+  epub:
+    default
+
+editor: visual
+

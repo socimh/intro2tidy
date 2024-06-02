@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hans" xml:lang="zh-Hans"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>tidyverse 入门 - 1&nbsp; R 语言简介</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./tibble.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="切换侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R 语言简介</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="切换侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">tidyverse 入门</a> 
+        <div class="sidebar-tools-main">
+    <div class="dropdown">
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download"><i class="bi bi-download"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./tidyverse-入门.pdf">
+              <i class="bi bi-bi-file-pdf pe-1"></i>
+            Download PDF
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./tidyverse-入门.epub">
+              <i class="bi bi-bi-journal pe-1"></i>
+            Download ePub
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="搜索"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">前言</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R 语言简介</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tibble.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">tibble 数据</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">dplyr 基础</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="切換部分">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./dplyr-skim.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">dplyr 浏览</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./dplyr-sort.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">dplyr 排序</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./dplyr-pipe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">magrittr 管道</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./dplyr-select.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">dplyr 选取或删除</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./dplyr-mutate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">dplyr 更改或新建</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./dplyr-stat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">dplyr 统计</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./dplyr-group.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">dplyr 分组</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./dplyr-join.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">dplyr 合并</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">本页目录</h2>
+   
+  <ul>
+  <li><a href="#r-的劣势" id="toc-r-的劣势" class="nav-link active" data-scroll-target="#r-的劣势"><span class="header-section-number">1.1</span> R 的劣势</a></li>
+  <li><a href="#r-的优势" id="toc-r-的优势" class="nav-link" data-scroll-target="#r-的优势"><span class="header-section-number">1.2</span> R 的优势</a></li>
+  <li><a href="#r-的下载" id="toc-r-的下载" class="nav-link" data-scroll-target="#r-的下载"><span class="header-section-number">1.3</span> R 的下载</a></li>
+  <li><a href="#配置-copilot" id="toc-配置-copilot" class="nav-link" data-scroll-target="#配置-copilot"><span class="header-section-number">1.4</span> 配置 Copilot</a></li>
+  <li><a href="#简单的代码" id="toc-简单的代码" class="nav-link" data-scroll-target="#简单的代码"><span class="header-section-number">1.5</span> 简单的代码</a></li>
+  <li><a href="#安装-r-包" id="toc-安装-r-包" class="nav-link" data-scroll-target="#安装-r-包"><span class="header-section-number">1.6</span> 安装 R 包</a></li>
+  <li><a href="#对象和类型" id="toc-对象和类型" class="nav-link" data-scroll-target="#对象和类型"><span class="header-section-number">1.7</span> 对象和类型</a></li>
+  <li><a href="#数据和函数" id="toc-数据和函数" class="nav-link" data-scroll-target="#数据和函数"><span class="header-section-number">1.8</span> 数据和函数</a></li>
+  <li><a href="#数据的维度" id="toc-数据的维度" class="nav-link" data-scroll-target="#数据的维度"><span class="header-section-number">1.9</span> 数据的维度</a></li>
+  <li><a href="#r-工作流程" id="toc-r-工作流程" class="nav-link" data-scroll-target="#r-工作流程"><span class="header-section-number">1.10</span> R 工作流程</a></li>
+  <li><a href="#sec-chengyu" id="toc-sec-chengyu" class="nav-link" data-scroll-target="#sec-chengyu"><span class="header-section-number">1.11</span> 成语接龙</a></li>
+  <li><a href="#导入导出数据" id="toc-导入导出数据" class="nav-link" data-scroll-target="#导入导出数据"><span class="header-section-number">1.12</span> 导入导出数据</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R 语言简介</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>R 语言是统计学家设计的编程语言。</p>
+<section id="r-的劣势" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="r-的劣势"><span class="header-section-number">1.1</span> R 的劣势</h2>
+<p>假设一趟京广高铁总共要经过15个车站，那么相当于有210个区间组合。如果一名乘客购买了一张从北京到广州的车票，那就意味着要在210个区间上锁定这个座位，避免重复出票。放眼全国，无数的列车交织成一张巨大的数据网络，这需要一套非常先进的算法。所以12306需要用Java来开发，不可能用R。类似地，C++使用舞蹈链（Dancing Links）算法解开一个数独，所需时间不到1毫秒，这显然也是R做不到的。</p>
+<p>假设有一个宏观经济学问题，需要求解一个抛物型偏微分方程，我们需要用到Schmidt, Crank-Nicolson, 或 Du Fort and Frankel 的方法。这时，Matlab 或 Julia 会是最合适的软件，因为它们内置了很多实用的函数，而且计算速度也很不错。</p>
+<p>假设你手头有几百万条招聘广告。你希望用一套简单的指令调用GPT-4或其他AI引擎的API，批量地阅读这些广告，并给每条广告贴一个“职业类别”的标签。当前，最好用的软件是Python，因为它有最成熟的接入Openai的方案。</p>
+<p>假设你拿到了一套调查数据，需要处理变量标签、数值标签，也需要画模型拟合图，那么Stata再适合不过了。</p>
+<p>假设有200多名学员报名了2024年云南大学的暑期班，他们的学校、专业、推荐人等信息都记录在一张表里。他们可能会写邮件说无法参加。有的同学也可能临时加入。有一些学生的特殊情况需要写备注或标记出来。这张表格可能需要在好几个人之间转手，调整不同的内容。鉴于这些需求，Excel显然是最好用的软件，而R的代码就太显累赘了。</p>
+<p>综上所述，R不擅长处理大数据、不擅长算法、不擅长科学计算、不擅长人工智能、不擅长处理变量标签、不擅长编辑繁琐的表格。在很多问题上，都有更强大的替代软件。</p>
+</section>
+<section id="r-的优势" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="r-的优势"><span class="header-section-number">1.2</span> R 的优势</h2>
+<p>虽然R不擅长这些，但是R仍然可以完成上面大多数的任务。R可以做矩阵运算，可以调用C++，可以接入Openai的API，可以分析调查数据，可以模仿marginslot，可以逐个单元格编辑表格。R还可以爬取网页，可以机器学习，可以深度学习，可以分析五花八门的数据，可以输出多种多样的图表。</p>
+<p>R 语言封装了大量的实用函数。在我看来，在所有软件中，R 对统计相关函数的覆盖最为全面，在很多任务上优于 Stata 和 Python，当然更优于 Excel 和 C++。此外，相比 R 的强大功能，它的代码并不复杂。</p>
+<ol type="1">
+<li>All in one，功能覆盖了统计学和数据科学的绝大多数领域</li>
+<li>相比“上位”软件，清晰、简洁、易读写</li>
+<li>相比“下位”软件，免费、灵活、功能全</li>
+<li>大量公开、免费、易懂的学习资源</li>
+</ol>
+</section>
+<section id="r-的下载" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="r-的下载"><span class="header-section-number">1.3</span> R 的下载</h2>
+<p>您可以前往 <a href="https://www.r-project.org/">R 的官网</a>下载最新版本的 R。</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/rweb.png" class="img-fluid figure-img" width="400"></p>
+</figure>
+</div>
+<p>您也可以在<a href="https://rstudio.com/">RStudio的官网</a>下载 RStudio。</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/rstudioweb.png" class="img-fluid figure-img" width="500"></p>
+</figure>
+</div>
+<p>顾名思义，RStudio 就是 R 的工作室。我们知道，编程语言需要写代码，但我们通常不会用 txt 文本文档来写；集成开发环境（IDE）才是我们写代码最合适的地方。Posit 公司开发的 RStudio 就是当下最全能、最热门的 R 语言 IDE。</p>
+<p>顺带一提，现在也有很多 R 用户使用微软的 Visual Studio Code (VS Code)。这是一个更综合的 IDE，可以兼容各种各样的编程语言。</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/rstudio.png" class="img-fluid figure-img" width="500"></p>
+</figure>
+</div>
+<p>这是一个非常干净的RStudio的界面。左上角的部分是源文件窗口，用来阅读和书写代码；左下角的部分是控制台（console），用来输出代码的运行结果；右上角的窗口罗列了当前环境（environment）中的对象（objects），也可以用来查看已执行的代码；右下角的窗口整合了文件、图像、包（packages）、帮助等功能。</p>
+<!-- 可以参考[这本书的3.3.2节](https://bookdown.org/yih_huynh/Guide-to-R-Book/an-informational-tour.html) -->
+<p>RStudio 提供了一些实用的快捷键，现阶段我们只需要记住一个：<code>Ctrl/Cmd + Enter</code>运行选中代码。</p>
+</section>
+<section id="配置-copilot" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="配置-copilot"><span class="header-section-number">1.4</span> 配置 Copilot</h2>
+<p>AI时代，写代码不能少了Copilot。请参考这篇<a href="https://mp.weixin.qq.com/s/YA5LNely0alemNfX0Upoew">公众号文章</a>，在RStudio中配置Copilot。它可以帮你自动补全代码。</p>
+<p>Copilot 有很多使用方法，其核心逻辑是通过<strong>代码文件中现有的内容</strong>来预测你接下来想写的东西。比方说，如果你想批量地对数据中的变量名做某一种操作，那么大约有下列步骤：</p>
+<ol type="1">
+<li>打印数据的变量名列表</li>
+<li>把数据的变量名列表粘贴到代码文件中</li>
+<li>写1-2行代码示例</li>
+<li>等待 Copilot 自动补全，然后按 tab 键同意</li>
+<li>把光标移到整段代码的上方，键入井号（#），让 Copilot 自动生成注释</li>
+</ol>
+<p>注意，一般来说，Copilot 只会填补句尾、整行或整段的空白。换句话说，你需要把光标移动到句末或者空白行，它才会开始运转。当光标在句中或句首时，别再痴痴地等着它来填补啦。</p>
+</section>
+<section id="简单的代码" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="简单的代码"><span class="header-section-number">1.5</span> 简单的代码</h2>
+<p>安装好了 R 和 RStudio，我们就可以尝试一些简单的代码了。比方说，我们可以在 R 里面直接进行四则运算：</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 用 3, 4, 5, 9 算 24 点</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>(<span class="dv">4</span> <span class="sc">+</span> <span class="dv">9</span> <span class="sc">-</span> <span class="dv">5</span>) <span class="sc">*</span> <span class="dv">3</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 24</code></pre>
+</div>
+</div>
+<p>在 R 里面，可以用引号包裹多语言文本：</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 使用英文的单引号 '' 或双引号 "" 表示文本</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="st">"你好，R！"</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "你好，R！"</code></pre>
+</div>
+</div>
+<p>也可以调用函数完成更复杂的任务：</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 用 sqrt() 开平方根</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">25</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 用 nchar() 数字符数</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nchar</span>(<span class="st">"你好"</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+</div>
+<p>此外，我们可以把一些结果存储下来，以便后期调用：</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 赋值 a 为 123</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">123</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 查看 a 的值</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>a</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 123</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 计算 a 乘以 2</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>a <span class="sc">*</span> <span class="dv">2</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 246</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 赋值 b 为 a 乘以 2 的结果</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> a <span class="sc">*</span> <span class="dv">2</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 查看 b 的值</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>b</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 246</code></pre>
+</div>
+</div>
+</section>
+<section id="安装-r-包" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="安装-r-包"><span class="header-section-number">1.6</span> 安装 R 包</h2>
+<p>在本书中，我们主要需要用到 tidyverse 包和 statart 包。在继续下面的内容之前，请让我们先下载这两个包：</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 下载 tidyverse</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 下载 statart</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"socimh/statart"</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="对象和类型" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="对象和类型"><span class="header-section-number">1.7</span> 对象和类型</h2>
+<p>好，在刚才的例子里，我们其实接触了很多 R 里面的对象（object）。我们可以使用 statart 包里的 <code>s_type()</code> 函数来判断对象的类型（type）：</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(statart)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 实数（double）</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">s_type</span>(<span class="dv">25</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "double"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 字符（character）</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">s_type</span>(<span class="st">"你好，R！"</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 函数（function）</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">s_type</span>(sqrt)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "function"</code></pre>
+</div>
+</div>
+<p>函数通常都以 <code>f()</code> 的形式出现，带有圆括号。</p>
+</section>
+<section id="数据和函数" class="level2" data-number="1.8">
+<h2 data-number="1.8" class="anchored" data-anchor-id="数据和函数"><span class="header-section-number">1.8</span> 数据和函数</h2>
+<p>所以，在前面一小节的几行代码里，我们已经接触了实数（double）、字符（character）和函数（function）这三种对象了。反过来说，上述代码基本都是由对象组成的。</p>
+<p>我们可以把对象大致分为数据（data）和函数。广义的“数据”类似于信息（information），比方说 <code>25</code> 和 <code>"你好"</code>，只要有实际内容就行。当然，这和我们日常生活中的用法有所不同。我眼中的数据，可以涵盖衣食住行等我们生活中任何有实际意义的东西。</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+笔记
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>所有信息，都可以是数据。</p>
+</div>
+</div>
+<p>如果代码中只有数据，那它通常做不了什么。打个比方，数据就像是名词，而一堆名词是零散的，无法组成句子。“头、明月、头、故乡”，这不成一句话；“举头望明月，低头思故乡”有了动词的“润滑”，就可以串联成一句话了。函数就像是动词。</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+笔记
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>在 R 语言里，数据（data）通常像名词，而函数（functions）通常像动词。</p>
+</div>
+</div>
+<!-- 动词和名词的组合，不仅可以形成句子，而且句子往往传达了超越于词素本身的意涵。根据我们想要表达的意思，排列我们手头的动词和名词，这叫做语文；在 R 语言里穿插函数和数据，这叫做编程。 -->
+</section>
+<section id="数据的维度" class="level2" data-number="1.9">
+<h2 data-number="1.9" class="anchored" data-anchor-id="数据的维度"><span class="header-section-number">1.9</span> 数据的维度</h2>
+<p>R 语言是一门分析数据的语言。但是，数据的种类那么多，我们要如何上手呢？我想从数据的维度说起。</p>
+<p>随着 3D 电影和 VR 设备的普及，我们可以看到三维立体的视频。3D 的 D 就是维度（dimension）的意思。在我看来，我们常用的数据也有四种维度：零维、一维、二维和多维。</p>
+
+<style>
+    tr {
+        text-align: center;
+    }
+    table {
+      width: 100%;
+    }
+</style>
+
+<table>
+  <thead>
+    <tr style="border-top:2px solid black;
+      border-bottom:1px solid black">
+      <th>维度</th>
+      <th>几何意义</th>
+      <th>数据意义</th>
+      <th>R 语言范例</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <td>零维（0D）</td>
+    <td>点</td>
+    <td>值</td>
+    <td>数、字符等</td>
+    </tr>
+    <tr>
+    <td>一维（1D）</td>
+    <td>线</td>
+    <td>列</td>
+    <td>数列、字符向量等</td>
+    </tr>
+    <tr>
+    <td>二维（2D）</td>
+    <td>面</td>
+    <td>表格</td>
+    <td>矩阵、tibble等</td>
+    </tr>
+    
+    <tr style="border-bottom:2px solid black">
+    <td>多维（nD）</td>
+    <td>多维空间</td>
+    <td>数组（array）</td>
+    <td>数组、多级列表等</td>
+    </tr>
+  </tbody>
+</table>
+<p>零维的数据就是值。比方说，我们讲中国有14亿人，“14亿”就是一个零维的数据；广东简称“粤”，则“粤”这个字也可以视作零维的数据。</p>
+<p>一维的数据是列，或者说多个值的集合。这在我们生活中很常见。比方说，1到10的数列就是一维的数据；再比如，中国所有省份的名称，就构成一列字符，或者叫字符向量（character vector）。</p>
+<p>二维的数据是表，或者说多列的集合。这也是我们生活中最常见的数据维度，像 Excel 一打开就是二维数据的处理面板。这里不做赘述。</p>
+<p>多维的数据是数组，是由低维数据一层层集合上来得到的。一个例子是时间：秒、分、时、天、月、年，向上集合，最终组成了一个六维的数据。年包括月，月包括天，以此类推。我们说“2008年8月8日 20时00分00秒”，其实就是指定了六个维度，指向时间的六维空间中特定的那一个时点——北京奥运会开幕的那个瞬间。</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/types.png" class="img-fluid figure-img" width="400"></p>
+</figure>
+</div>
+</section>
+<section id="r-工作流程" class="level2" data-number="1.10">
+<h2 data-number="1.10" class="anchored" data-anchor-id="r-工作流程"><span class="header-section-number">1.10</span> R 工作流程</h2>
+<p>显然，我们做统计分析时，最常接触的就是一维和二维的数据。但是在 R 里面，一维和二维的数据仍然有很多类型，我们应该从何学起呢？</p>
+
+<!-- 对于新手可以先不学习矢量、列表、矩阵、数据框（data frame）、data.table 等数据类型， -->
+<p>我认为，只要先把 tibble 摸透，就可以完成大多数数据分析了。</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/intro_diagram.png" class="img-fluid figure-img" width="400"></p>
+</figure>
+</div>
+<p>当然，输入和输出的数据，通常都不是 tibble。但是，只需要三个步骤，我们就可以把任意格式的输入数据转换成任意格式的输出内容了。</p>
+<ol type="1">
+<li>将其他格式数据导入为 tibble</li>
+<li>处理 tibble</li>
+<li>将 tibble 数据导出为其他格式</li>
+</ol>
+<p>这里，输入的数据格式可以是</p>
+<ul>
+<li>.RData 和 .rds 等 R 格式的数据</li>
+<li>R 和 R 包自带数据</li>
+<li>通过 R 代码手动输入的数据</li>
+<li>Excel 数据</li>
+<li>Stata, SPSS, SAS 等统计软件数据</li>
+<li>.csv, .tsv, .txt 等纯文本数据</li>
+<li>.zip, .gz, .bz2, .xz 等压缩数据</li>
+<li>.bin, .dat, .ftr, .parquet 等二进制数据</li>
+<li>XML, HTML, JSON 等标记数据</li>
+<li>.shp, .geotiff 等地理信息数据</li>
+<li>文件夹、压缩包</li>
+<li>图片</li>
+<li>远程数据库和大数据</li>
+<li>在线数据、网站源码等</li>
+<li>还有很多…</li>
+</ul>
+<p>类似地，R 不仅可以导出成<strong>上面大部分格式</strong>的数据，而且可以直接输出统计报告，包括</p>
+<ul>
+<li>在终端输出的文本和表格（复制或截图）</li>
+<li>Excel, Markdown, LaTeX 等格式的表格</li>
+<li>各种格式的图片</li>
+<li>Word 和 PDF 文档</li>
+<li>html 网页</li>
+<li>可交互的图表</li>
+<li>（配合 Quarto）幻灯片</li>
+<li>（配合 Quarto）文章、书籍等</li>
+<li>（配合 Quarto）网站</li>
+<li>还有很多…</li>
+</ul>
+<p>可见，学会了 tibble 这个桥梁，我们能够完成多少任务！</p>
+</section>
+<section id="sec-chengyu" class="level2" data-number="1.11">
+<h2 data-number="1.11" class="anchored" data-anchor-id="sec-chengyu"><span class="header-section-number">1.11</span> 成语接龙</h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-short" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="fig/word_chain_short.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">图&nbsp;1.1: 普通的成语接龙</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-long" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="fig/word_chain_long.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">图&nbsp;1.2: “为所欲为”的成语接龙</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>用成语接龙打个比方，大部分成语输入的字和输出的字都不一样。但是，“为所欲为”却是一个例外，输入的是“为”，输出的也是“为”。学会“为所欲为”的小朋友，哪怕成语储备量只有这一个，也能自己接龙100次。（详见 <a href="dplyr-pipe.html#sec-wei"><span>章节&nbsp;5.5</span></a> ）</p>
+<p>我们工作坊要学的，99%的函数都会围绕 tibble 和 gg；这是我的刻意设计，也是大势所趋。</p>
+<p>我对R的初学者有三个建议：</p>
+<ol type="1">
+<li>只学 tibble，不必分心学向量（vector）、列表（list）、矩阵、data.table 等对象</li>
+<li>只学可能要用的，忘记一定没用的</li>
+<li>无需死记硬背，想用什么查一下，用多了自然就记住了</li>
+</ol>
+<p>其实我自己现在也是这样。data.table 怎么用，早就忘得差不多了；想要处理一个复杂的 list，有的 purrr 函数，也得临时去查。不过一旦入门了，这种简单的函数，一两分钟就会用了。</p>
+</section>
+<section id="导入导出数据" class="level2" data-number="1.12">
+<h2 data-number="1.12" class="anchored" data-anchor-id="导入导出数据"><span class="header-section-number">1.12</span> 导入导出数据</h2>
+<ul>
+<li><code>Week1-1. import_and_export_dta.R</code> 简要地演示了清理数据的全流程</li>
+<li><code>Week1-2. import_and_plot_dta.R</code> 简要地演示了数据可视化的全流程</li>
+<li><code>Week1-3. import_any_data.R</code> 展示了如何导入各种类型的数据</li>
+<li><code>Week1-4. generate_and_export_any_data.R</code> 展示了如何生成、导出各种类型的数据</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "已复制");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "已复制");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">前言</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./tibble.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">tibble 数据</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
