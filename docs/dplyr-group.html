@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>tidyverse 入门 - 9&nbsp; dplyr 分组</title>
+<title>tidyverse 入门 - 10&nbsp; dplyr 分组</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -108,7 +108,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="切换侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./dplyr-skim.html">dplyr 基础</a></li><li class="breadcrumb-item"><a href="./dplyr-group.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">dplyr 分组</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./dplyr-skim.html">dplyr 基础</a></li><li class="breadcrumb-item"><a href="./dplyr-group.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">dplyr 分组</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="切换侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -180,32 +180,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./dplyr-grammar.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">dplyr 的两种语法</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./dplyr-select.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">dplyr 选取或删除</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">dplyr 选取或删除</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./dplyr-mutate.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">dplyr 更改或新建</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">dplyr 更改或新建</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./dplyr-stat.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">dplyr 统计</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">dplyr 统计</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./dplyr-group.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">dplyr 分组</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">dplyr 分组</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./dplyr-join.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">dplyr 合并</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">dplyr 合并</span></span></a>
   </div>
 </li>
       </ul>
@@ -220,10 +226,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">本页目录</h2>
    
   <ul>
-  <li><a href="#summarise...-.by" id="toc-summarise...-.by" class="nav-link active" data-scroll-target="#summarise...-.by"><span class="header-section-number">9.1</span> <code>summarise(..., .by)</code></a></li>
-  <li><a href="#summ...-.by" id="toc-summ...-.by" class="nav-link" data-scroll-target="#summ...-.by"><span class="header-section-number">9.2</span> <code>summ(..., .by)</code></a></li>
-  <li><a href="#mutate...-.by" id="toc-mutate...-.by" class="nav-link" data-scroll-target="#mutate...-.by"><span class="header-section-number">9.3</span> <code>mutate(..., .by)</code></a></li>
-  <li><a href="#group_by" id="toc-group_by" class="nav-link" data-scroll-target="#group_by"><span class="header-section-number">9.4</span> <code>group_by()</code></a></li>
+  <li><a href="#summarise...-.by" id="toc-summarise...-.by" class="nav-link active" data-scroll-target="#summarise...-.by"><span class="header-section-number">10.1</span> <code>summarise(..., .by)</code></a></li>
+  <li><a href="#summ...-.by" id="toc-summ...-.by" class="nav-link" data-scroll-target="#summ...-.by"><span class="header-section-number">10.2</span> <code>summ(..., .by)</code></a></li>
+  <li><a href="#mutate...-.by" id="toc-mutate...-.by" class="nav-link" data-scroll-target="#mutate...-.by"><span class="header-section-number">10.3</span> <code>mutate(..., .by)</code></a></li>
+  <li><a href="#group_by" id="toc-group_by" class="nav-link" data-scroll-target="#group_by"><span class="header-section-number">10.4</span> <code>group_by()</code></a></li>
   </ul>
 </nav>
     </div>
@@ -232,7 +238,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">dplyr 分组</span></h1>
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">dplyr 分组</span></h1>
 </div>
 
 
@@ -258,8 +264,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>group_by()</code> 在函数前构造分组数据</li>
 <li><code>ungroup()</code> 取消数据分组</li>
 </ul>
-<section id="summarise...-.by" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="summarise...-.by"><span class="header-section-number">9.1</span> <code>summarise(..., .by)</code></h2>
+<section id="summarise...-.by" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="summarise...-.by"><span class="header-section-number">10.1</span> <code>summarise(..., .by)</code></h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -321,8 +327,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="summ...-.by" class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="summ...-.by"><span class="header-section-number">9.2</span> <code>summ(..., .by)</code></h2>
+<section id="summ...-.by" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="summ...-.by"><span class="header-section-number">10.2</span> <code>summ(..., .by)</code></h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">%&gt;%</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summ</span>(price, <span class="at">.by =</span> clarity)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -377,8 +383,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="mutate...-.by" class="level2" data-number="9.3">
-<h2 data-number="9.3" class="anchored" data-anchor-id="mutate...-.by"><span class="header-section-number">9.3</span> <code>mutate(..., .by)</code></h2>
+<section id="mutate...-.by" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="mutate...-.by"><span class="header-section-number">10.3</span> <code>mutate(..., .by)</code></h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">%&gt;%</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
@@ -445,8 +451,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="group_by" class="level2" data-number="9.4">
-<h2 data-number="9.4" class="anchored" data-anchor-id="group_by"><span class="header-section-number">9.4</span> <code>group_by()</code></h2>
+<section id="group_by" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="group_by"><span class="header-section-number">10.4</span> <code>group_by()</code></h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">%&gt;%</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(cut)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -783,12 +789,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./dplyr-stat.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">dplyr 统计</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">dplyr 统计</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./dplyr-join.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">dplyr 合并</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">dplyr 合并</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

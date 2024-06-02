@@ -46,5 +46,8 @@
   },
   "import.qmd": {
     "import.html": "d911d18c"
+  },
+  "dplyr-grammar.qmd": {
+    "dplyr-grammar.html": "de743b37"
   }
 }

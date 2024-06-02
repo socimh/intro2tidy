@@ -12,11 +12,11 @@ number-sections: true
 
 -   类别变量
     -   `count()` 计算各类别数量
-    -   `statart::tab()` 计算各类别数量、[**百分比、累计百分比**]{style="color:darkred"}
-    -   `statart::tab1()` 同时列出[**多个**]{style="color:darkred"}变量的上述统计量
+    -   `tab()` 计算各类别数量、[**百分比、累计百分比**]{style="color:darkred"}
+    -   `tab1()` 同时列出[**多个**]{style="color:darkred"}变量的上述统计量
 -   连续变量
     -   `summarise()` 统计[**个别**]{style="color:darkred"}统计量
-    -   `statart::summ()` 快速生成[**大量**]{style="color:darkred"}变量的[**多个**]{style="color:darkred"}统计量
+    -   `summ()` 快速生成[**大量**]{style="color:darkred"}变量的[**多个**]{style="color:darkred"}统计量
   
 
 ## `count()`
@@ -156,7 +156,6 @@ diamonds %>%
 # 同时统计多个变量
 diamonds %>%
   summ(x:z)
-
 ```
 
 在 x, y, z 这三个维度上，钻石的 z（高度）最小，而 x 和 y 的均值几乎一样。
@@ -227,7 +226,6 @@ complex_tb %>%
 ```{r}
 complex_tb %>%
   summ(everything())
-
 ```
 
 <!-- 小结一下，可以划分出三大类变量，分别是

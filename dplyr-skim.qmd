@@ -12,12 +12,17 @@ number-sections: true
 
 -   浏览数据
     -   `print()` 展示数据的[**前面几列**]{style="color:darkred"}、前面几行
-    -   `s_print()` 展示数据的前面几列、[**首尾几行**]{style="color:darkred"}
+    -   `print_headtail()` 展示数据的前面几列、[**首尾几行**]{style="color:darkred"}
+    -   `print_interval()` 展示数据的前面几列、[**均匀分布的几行**]{style="color:darkred"}
     -   `glimpse()` 展示数据[**每一列**]{style="color:darkred"}的前面几行
-    -   `view()` 打开类似 Excel 的界面，查看[**整个数据**]{style="color:darkred"}的表格
+-   浏览数据（新窗口）
+    -   `view()` 和 `browse()` 打开类似 Excel 的界面，查看数据表格
+    -   `flextable::as_flextable()` 打开类似网页的界面，查看数据表格，也可以进一步美化、输出
 -   浏览变量
-    -   `names()` 和 `names_as_column()` 浏览变量名
+    -   `variables()`, `names()` 和 `ds()` 浏览变量名
+    -   `variables_search()` 根据变量名或变量标签搜索变量
     -   `codebook()` 查看变量标签和概要
+    -   `codebook_detail()` 查看详细的变量和数值标签
 
 ## `print()`
 
@@ -42,24 +47,35 @@ library(tidyverse)
 
 diamonds
 
-print(diamonds)
+print(diamonds) # equivalent
 ```
 
-所以，我们通常不会主动使用 `print()`。但是，我们在很多时候用到了这个函数。
+所以，我们通常不会主动使用 `print()`。
 
-我们还可以用 statart 包的 `sprint()` 函数，它可以打印一个数据的开头几行和结尾几行：
+我们还可以用 statart 包的 `print_headtail()` 和 `print_interval()` 函数。前者可以打印一个数据的开头几行和结尾几行，后者可以等间距地抽几行（有点像系统抽样）打印：
 
 ```{r}
 #| code-fold: false
 #| warning: false
 library(statart)
 
-s_print(diamonds)
-
-s_print(diamonds, n = 10)
+print_headtail(diamonds)
+print_headtail(diamonds, n = 20)
+print_interval(diamonds)
+print_interval(diamonds, n = 20)
 ```
 
-## `names()`
+## `variables()` 和 `variables_search()`
+```{r}
+#| code-fold: false
+#| warning: false
+
+variables(diamonds)
+variables(lifeexp)
+variables_search(lifeexp, "e")
+```
+
+## `names()` 和 `ds()`
 
 ```{r}
 #| code-fold: false
@@ -69,6 +85,9 @@ library(tidyverse)
 
 # 罗列变量名
 names(diamonds)
+names_as_column(diamonds)
+ds(diamonds, 1:5)
+ds_as_column(diamonds, 1:5)
 ```
 
 ## `glimpse()`
@@ -89,6 +108,9 @@ glimpse(diamonds)
 
 # 打开 Excel 式的数据表
 view(diamonds)
+
+# browse() 功能更强大，可以选择特定变量
+browse(diamonds, 1:3)
 ```
 
 这里因为条件的限制无法演示，就在下面贴一些截图吧。大家可以在自己的 RStudio 里面运行代码，尝试一下。
@@ -110,4 +132,6 @@ library(statart)
 # 查看变量基本信息
 codebook(diamonds)
 
+# 查看变量详细信息
+codebook_detail(diamonds)
 ```

@@ -1,0 +1,61 @@
+\babel@toc {nil}{}\relax 
+\contentsline {chapter}{前言}{1}{chapter*.2}%
+\contentsline {chapter}{\numberline {第一章\hspace {.3em}}R 语言简介}{3}{chapter.1}%
+\contentsline {section}{\numberline {1.1}R 的劣势}{3}{section.1.1}%
+\contentsline {section}{\numberline {1.2}R 的优势}{4}{section.1.2}%
+\contentsline {section}{\numberline {1.3}R 的下载}{4}{section.1.3}%
+\contentsline {section}{\numberline {1.4}配置 Copilot}{6}{section.1.4}%
+\contentsline {section}{\numberline {1.5}简单的代码}{7}{section.1.5}%
+\contentsline {section}{\numberline {1.6}安装 R 包}{9}{section.1.6}%
+\contentsline {section}{\numberline {1.7}对象和类型}{9}{section.1.7}%
+\contentsline {section}{\numberline {1.8}数据和函数}{10}{section.1.8}%
+\contentsline {section}{\numberline {1.9}数据的维度}{10}{section.1.9}%
+\contentsline {section}{\numberline {1.10}R 工作流程}{12}{section.1.10}%
+\contentsline {section}{\numberline {1.11}成语接龙}{14}{section.1.11}%
+\contentsline {section}{\numberline {1.12}导入导出数据}{15}{section.1.12}%
+\contentsline {chapter}{\numberline {第二章\hspace {.3em}}tibble 数据}{17}{chapter.2}%
+\contentsline {section}{\numberline {2.1}整洁数据}{17}{section.2.1}%
+\contentsline {section}{\numberline {2.2}\texttt {tidyverse}}{19}{section.2.2}%
+\contentsline {section}{\numberline {2.3}打印 \texttt {tibble}}{20}{section.2.3}%
+\contentsline {section}{\numberline {2.4}列的性质}{22}{section.2.4}%
+\contentsline {section}{\numberline {2.5}列的类型}{24}{section.2.5}%
+\contentsline {part}{第一部分\hspace {1em}dplyr 基础}{25}{part.1}%
+\contentsline {chapter}{\numberline {第三章\hspace {.3em}}dplyr 浏览}{27}{chapter.3}%
+\contentsline {section}{\numberline {3.1}\texttt {print()}}{27}{section.3.1}%
+\contentsline {section}{\numberline {3.2}\texttt {names()}}{30}{section.3.2}%
+\contentsline {section}{\numberline {3.3}\texttt {glimpse()}}{30}{section.3.3}%
+\contentsline {section}{\numberline {3.4}\texttt {view()}}{31}{section.3.4}%
+\contentsline {section}{\numberline {3.5}\texttt {codebook()}}{33}{section.3.5}%
+\contentsline {chapter}{\numberline {第四章\hspace {.3em}}dplyr 排序}{35}{chapter.4}%
+\contentsline {section}{\numberline {4.1}\texttt {relocate()}}{35}{section.4.1}%
+\contentsline {section}{\numberline {4.2}\texttt {.before} 和 \texttt {.after}}{37}{section.4.2}%
+\contentsline {section}{\numberline {4.3}\texttt {arrange()}}{38}{section.4.3}%
+\contentsline {chapter}{\numberline {第五章\hspace {.3em}}magrittr 管道}{41}{chapter.5}%
+\contentsline {section}{\numberline {5.1}\texttt {\%\textgreater {}\%} 定义}{41}{section.5.1}%
+\contentsline {section}{\numberline {5.2}\texttt {\%\textgreater {}\%} 优点}{41}{section.5.2}%
+\contentsline {section}{\numberline {5.3}\texttt {\%\textgreater {}\%} 范例}{43}{section.5.3}%
+\contentsline {section}{\numberline {5.4}\texttt {\%\textgreater {}\%} 和 \texttt {\textbar {}\textgreater {}}}{44}{section.5.4}%
+\contentsline {section}{\numberline {5.5}为所欲为}{44}{section.5.5}%
+\contentsline {chapter}{\numberline {第六章\hspace {.3em}}dplyr 选取或删除}{47}{chapter.6}%
+\contentsline {section}{\numberline {6.1}\texttt {select()}}{47}{section.6.1}%
+\contentsline {section}{\numberline {6.2}\texttt {:} 和 \texttt {c()}}{50}{section.6.2}%
+\contentsline {section}{\numberline {6.3}\texttt {head()} 和 \texttt {tail()}}{53}{section.6.3}%
+\contentsline {section}{\numberline {6.4}\texttt {slice()}}{54}{section.6.4}%
+\contentsline {section}{\numberline {6.5}\texttt {filter()}}{55}{section.6.5}%
+\contentsline {chapter}{\numberline {第七章\hspace {.3em}}dplyr 更改或新建}{57}{chapter.7}%
+\contentsline {section}{\numberline {7.1}\texttt {rename()}}{58}{section.7.1}%
+\contentsline {section}{\numberline {7.2}\texttt {mutate()}}{59}{section.7.2}%
+\contentsline {chapter}{\numberline {第八章\hspace {.3em}}dplyr 统计}{63}{chapter.8}%
+\contentsline {section}{\numberline {8.1}\texttt {count()}}{63}{section.8.1}%
+\contentsline {section}{\numberline {8.2}\texttt {tab()} 和 \texttt {tab1()}}{64}{section.8.2}%
+\contentsline {section}{\numberline {8.3}\texttt {summarise()}}{67}{section.8.3}%
+\contentsline {section}{\numberline {8.4}\texttt {summ()}}{68}{section.8.4}%
+\contentsline {chapter}{\numberline {第九章\hspace {.3em}}dplyr 分组}{75}{chapter.9}%
+\contentsline {section}{\numberline {9.1}\texttt {summarise(...,\ .by)}}{75}{section.9.1}%
+\contentsline {section}{\numberline {9.2}\texttt {summ(...,\ .by)}}{77}{section.9.2}%
+\contentsline {section}{\numberline {9.3}\texttt {mutate(...,\ .by)}}{79}{section.9.3}%
+\contentsline {section}{\numberline {9.4}\texttt {group\_by()}}{81}{section.9.4}%
+\contentsline {chapter}{\numberline {第十章\hspace {.3em}}dplyr 合并}{85}{chapter.10}%
+\contentsline {section}{\numberline {10.1}\texttt {bind\_rows()}}{85}{section.10.1}%
+\contentsline {section}{\numberline {10.2}\texttt {bind\_cols()}}{87}{section.10.2}%
+\contentsline {section}{\numberline {10.3}\texttt {left\_join()}}{88}{section.10.3}%

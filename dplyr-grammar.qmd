@@ -1,0 +1,169 @@
+---
+title: dplyr 的两种语法
+theme: united
+lang: zh
+toc: true
+toc-depth: 3
+toc-expand: 2
+toc-title: 本页目录
+number-sections: true
+---
+
+在众多对变量的操作中，有两种是最为核心的——选取和修改。
+
+-  `tidyselect` 选取变量，所有选变量的函数通用
+    -   `s_match()` 用类似 Stata 的方式选取变量
+    -   `:` 选取[**连续**]{style="color:darkred"}多个变量
+        -   `1:3` 选取第1-3个变量
+        -   `x1:x3` 选取x1、x3，及它们之间的所有变量
+    -   `c()` 选取[**任意**]{style="color:darkred"}多个变量
+        -   `c(1, 3, 5:7)` 选取第1、3、5、6、7个变量
+        -   `c(x1, x3, x5:x7)` 选取x1、x3、x5、x7，以及x5和x7之间的所有变量
+    -   `-` 表示不选择某些变量
+        -   比如，`-c(1, 3, 5:7)` 选取除了第1、3、5、6、7个以外的所有变量
+        -   不可以直接和 `:` 一起用，但可以和其他任意函数一起用
+        -   也就是说，`-1:3` 不行，`-c(1:3)` 可以
+    -   `starts_with("a")` 选取以a[**开头**]{style="color:darkred"}的若干变量
+    -   `ends_with("a")` 选取以a[**结尾**]{style="color:darkred"}的若干变量
+    -   `matches("a")` 选取[**包含**]{style="color:darkred"}a的若干变量
+    -   `everything()` 选取[**所有**]{style="color:darkred"}变量
+    -   `last_col()` 选取[**最后一个**]{style="color:darkred"}变量
+    -   `where(is.numeric)` 选取所有数值型的变量
+        -   更一般地，`where(~ mean(is.na(.x)) < .2)` 选取所有缺失值比例小于20%的变量
+    -   `all_of(chr)` 和 `any_of(chr)` 选取字符向量chr中记录的变量
+        -   比如，`all_of(c("a", "b"))` 表示选取变量a和b
+    -   可以用 `c()` 同时囊括上述多个函数
+        -   比如，`c(x1, starts_with("a"), last_col(2))` 表示同时选取x1、以a开头的若干变量、最后两个变量
+-   `data-masking` 修改变量，所有改变量的函数通用
+    -   `z = x + y` 表示把 x + y 的结果赋给 z
+    - `x = na_if_value(x, 1)` 和 `x = value_if_na(x, 1)` 缺失值转换
+    - `x_5g = cut_quantile(x, 5)` 切分变量
+    - `x = ifelse(x1 == 1, x2, x3+x4)` 条件语句
+    - `x = case_when(...)` 多重条件语句
+
+## `select()` 和 `tidyselect`
+
+`select()` 可以根据位置选取列，且支持全部 tidyselect 的语法。
+
+```{r}
+#| code-fold: false
+#| warning: false
+
+library(tidyverse)
+diamonds %>%
+  select(5) # 抽取第五列
+diamonds %>%
+  select(-5) # 删除第五列
+```
+
+`tidyselect` 也可以根据名称选取列。
+
+```{r}
+#| code-fold: false
+#| warning: false
+
+diamonds %>%
+  select(cut) # 选取cut变量
+diamonds %>%
+  select(-cut) # 删除cut变量
+```
+
+## `:` 和 `c()`
+
+`:` 表示多个连续的整数，比如 `1:3` 表示 1~3 这三个整数。
+
+```{r}
+#| code-fold: false
+#| warning: false
+
+1:5
+
+# 选取前五个变量
+diamonds %>%
+  select(1:5)
+
+# 用另一种方式选取前五个变量
+diamonds %>%
+  select(carat:depth)
+```
+
+`c()` 表示多个数的集合，它比 `:` 更灵活、更普适，缺点是写起来麻烦些。`c(1, 2, 3)` 和 `c(1:3)` 显然都不如 `1:3` 简洁。但是，`c()` 既可以表示不连续的整数，也可以表示其他类型的数：
+
+-   `c(1:3, 5)` 表示 1, 2, 3, 5 这四个数
+-   `c(1:3, 5:6)` 表示 1, 2, 3, 5, 6 这五个数
+-   `c(1.23, pi, exp(1), sqrt(2))` 表示 1.23, $\pi$, $e$, $\sqrt{2}$ 这四个数
+    -   不过，只有整数能用来选变量哦
+
+`c()` 是一个独立存在的底层函数，表示向量，它不属于 `tidyselect` 的一部分。但是，可以借用它来同时选取多个变量。
+
+```{r}
+#| code-fold: false
+#| warning: false
+
+c(1, 3:5)
+
+# 选取第1、3、4、5个变量
+diamonds %>%
+  select(c(1, 3:5))
+
+# 用另一种方式选取这些变量
+diamonds %>%
+  select(c(carat, color:depth))
+```
+
+## `starts_with()` 系列函数
+
+```{r}
+#| code-fold: false
+#| warning: false
+
+# 选取c开头的变量
+diamonds %>%
+  select(starts_with("c"))
+
+# 选取e结尾的变量
+diamonds %>%
+  select(ends_with("e"))
+
+# 选取包含a的变量
+diamonds %>%
+  select(matches("a"))
+
+# 选取全部变量
+diamonds %>%
+  select(everything())
+
+# 选取最后一个变量
+diamonds %>%
+  select(last_col())
+
+# 选取最后两个变量
+diamonds %>%
+  select(last_col(3))
+```
+
+## `where()`
+
+`where()` 是一个比较高级的、复杂的函数，因为它是一个“包着函数的函数”。
+
+```{r}
+#| code-fold: false
+#| warning: false
+
+# 选取数值型的变量
+diamonds %>%
+  select(where(is.numeric))
+
+# 选取文本型的变量（没有）
+diamonds %>%
+  select(where(is.character))
+
+# 选取类别型的变量
+diamonds %>%
+  select(where(is.factor))
+
+# where() 里面可以装更复杂的函数
+diamonds %>%
+  select(where(is.numeric)) %>%
+  select(where(~ mean(.x) < 8))
+```

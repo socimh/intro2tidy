@@ -59,7 +59,6 @@ diamonds %>%
 
 diamonds %>%
   summ(x:z, .by = clarity)
-
 ```
 
 ## `mutate(..., .by)`

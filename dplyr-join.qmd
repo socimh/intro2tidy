@@ -76,7 +76,6 @@ bind_cols(tb1, tb2)
 
 tb1 %>%
   left_join(tb2)
-
 ```
 
 ```{r}
@@ -96,5 +95,4 @@ tb1 %>%
 
 tb1 %>%
   left_join(tb2, by = "name")
-
 ```

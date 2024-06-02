@@ -3,12 +3,9 @@ styler::style_dir()
 
 library(tidyverse)
 
-source("D:/R/Stata-like Functions.R")
-library(haven)
-seeds <- read_dta("D:/Data/SEEDS/Hangzhou/Baseline Raw Data/Clean Data/seeds_hangzhou_20240123.dta")
-
 library(statart)
 
+install.packages("xfun")
 lifeexp |>
   codebook(safewater)
 

@@ -95,6 +95,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "搜索"
   }
 }</script>
+<link href="site_libs/tabwid-1.1.3/tabwid.css" rel="stylesheet">
+<script src="site_libs/tabwid-1.1.3/tabwid.js"></script>
 
 
 </head>
@@ -180,32 +182,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./dplyr-grammar.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">dplyr 的两种语法</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./dplyr-select.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">dplyr 选取或删除</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">dplyr 选取或删除</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./dplyr-mutate.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">dplyr 更改或新建</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">dplyr 更改或新建</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./dplyr-stat.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">dplyr 统计</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">dplyr 统计</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./dplyr-group.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">dplyr 分组</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">dplyr 分组</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./dplyr-join.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">dplyr 合并</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">dplyr 合并</span></span></a>
   </div>
 </li>
       </ul>
@@ -221,10 +229,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#print" id="toc-print" class="nav-link active" data-scroll-target="#print"><span class="header-section-number">3.1</span> <code>print()</code></a></li>
-  <li><a href="#names" id="toc-names" class="nav-link" data-scroll-target="#names"><span class="header-section-number">3.2</span> <code>names()</code></a></li>
-  <li><a href="#glimpse" id="toc-glimpse" class="nav-link" data-scroll-target="#glimpse"><span class="header-section-number">3.3</span> <code>glimpse()</code></a></li>
-  <li><a href="#view" id="toc-view" class="nav-link" data-scroll-target="#view"><span class="header-section-number">3.4</span> <code>view()</code></a></li>
-  <li><a href="#codebook" id="toc-codebook" class="nav-link" data-scroll-target="#codebook"><span class="header-section-number">3.5</span> <code>codebook()</code></a></li>
+  <li><a href="#variables-和-variables_search" id="toc-variables-和-variables_search" class="nav-link" data-scroll-target="#variables-和-variables_search"><span class="header-section-number">3.2</span> <code>variables()</code> 和 <code>variables_search()</code></a></li>
+  <li><a href="#names-和-ds" id="toc-names-和-ds" class="nav-link" data-scroll-target="#names-和-ds"><span class="header-section-number">3.3</span> <code>names()</code> 和 <code>ds()</code></a></li>
+  <li><a href="#glimpse" id="toc-glimpse" class="nav-link" data-scroll-target="#glimpse"><span class="header-section-number">3.4</span> <code>glimpse()</code></a></li>
+  <li><a href="#view" id="toc-view" class="nav-link" data-scroll-target="#view"><span class="header-section-number">3.5</span> <code>view()</code></a></li>
+  <li><a href="#codebook" id="toc-codebook" class="nav-link" data-scroll-target="#codebook"><span class="header-section-number">3.6</span> <code>codebook()</code></a></li>
   </ul>
 </nav>
     </div>
@@ -252,14 +261,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>浏览数据
 <ul>
 <li><code>print()</code> 展示数据的<span style="color:darkred"><strong>前面几列</strong></span>、前面几行</li>
-<li><code>s_print()</code> 展示数据的前面几列、<span style="color:darkred"><strong>首尾几行</strong></span></li>
+<li><code>print_headtail()</code> 展示数据的前面几列、<span style="color:darkred"><strong>首尾几行</strong></span></li>
+<li><code>print_interval()</code> 展示数据的前面几列、<span style="color:darkred"><strong>均匀分布的几行</strong></span></li>
 <li><code>glimpse()</code> 展示数据<span style="color:darkred"><strong>每一列</strong></span>的前面几行</li>
-<li><code>view()</code> 打开类似 Excel 的界面，查看<span style="color:darkred"><strong>整个数据</strong></span>的表格</li>
+</ul></li>
+<li>浏览数据（新窗口）
+<ul>
+<li><code>view()</code> 和 <code>browse()</code> 打开类似 Excel 的界面，查看数据表格</li>
+<li><code>flextable::as_flextable()</code> 打开类似网页的界面，查看数据表格，也可以进一步美化、输出</li>
 </ul></li>
 <li>浏览变量
 <ul>
-<li><code>names()</code> 和 <code>names_as_column()</code> 浏览变量名</li>
+<li><code>variables()</code>, <code>names()</code> 和 <code>ds()</code> 浏览变量名</li>
+<li><code>variables_search()</code> 根据变量名或变量标签搜索变量</li>
 <li><code>codebook()</code> 查看变量标签和概要</li>
+<li><code>codebook_detail()</code> 查看详细的变量和数值标签</li>
 </ul></li>
 </ul>
 <section id="print" class="level2" data-number="3.1">
@@ -296,7 +312,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 10  0.23 Very Good H     VS1      59.4    61   338  4     4.05  2.39
 # ℹ 53,930 more rows</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(diamonds)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(diamonds) <span class="co"># equivalent</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 53,940 × 10
    carat cut       color clarity depth table price     x     y     z
@@ -314,12 +330,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 # ℹ 53,930 more rows</code></pre>
 </div>
 </div>
-<p>所以，我们通常不会主动使用 <code>print()</code>。但是，我们在很多时候用到了这个函数。</p>
-<p>我们还可以用 statart 包的 <code>sprint()</code> 函数，它可以打印一个数据的开头几行和结尾几行：</p>
+<p>所以，我们通常不会主动使用 <code>print()</code>。</p>
+<p>我们还可以用 statart 包的 <code>print_headtail()</code> 和 <code>print_interval()</code> 函数。前者可以打印一个数据的开头几行和结尾几行，后者可以等间距地抽几行（有点像系统抽样）打印：</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(statart)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">s_print</span>(diamonds)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print_headtail</span>(diamonds)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 53,940 × 10
       carat cut       color clarity depth table price     x     y     z
@@ -335,9 +351,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 53939  0.86 Premium   H     SI2      61      58  2757  6.15  6.12  3.74
 53940  0.75 Ideal     D     SI2      62.2    55  2757  5.83  5.87  3.64
 # ℹ 53,930 more rows in the middle
-# ℹ Use `s_print(n = ...)` to see more rows</code></pre>
+# ℹ Use `print_headtail(n = ...)` to see more rows</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">s_print</span>(diamonds, <span class="at">n =</span> <span class="dv">10</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print_headtail</span>(diamonds, <span class="at">n =</span> <span class="dv">20</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 53,940 × 10
       carat cut       color clarity depth table price     x     y     z
@@ -347,34 +363,163 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     3  0.23 Good      E     VS1      56.9    65   327  4.05  4.07  2.31
     4  0.29 Premium   I     VS2      62.4    58   334  4.2   4.23  2.63
     5  0.31 Good      J     SI2      63.3    58   335  4.34  4.35  2.75
+    6  0.24 Very Good J     VVS2     62.8    57   336  3.94  3.96  2.48
+    7  0.24 Very Good I     VVS1     62.3    57   336  3.95  3.98  2.47
+    8  0.26 Very Good H     SI1      61.9    55   337  4.07  4.11  2.53
+    9  0.22 Fair      E     VS2      65.1    61   337  3.87  3.78  2.49
+   10  0.23 Very Good H     VS1      59.4    61   338  4     4.05  2.39
+53931  0.71 Premium   E     SI1      60.5    55  2756  5.79  5.74  3.49
+53932  0.71 Premium   F     SI1      59.8    62  2756  5.74  5.73  3.43
+53933  0.7  Very Good E     VS2      60.5    59  2757  5.71  5.76  3.47
+53934  0.7  Very Good E     VS2      61.2    59  2757  5.69  5.72  3.49
+53935  0.72 Premium   D     SI1      62.7    59  2757  5.69  5.73  3.58
 53936  0.72 Ideal     D     SI1      60.8    57  2757  5.75  5.76  3.5 
 53937  0.72 Good      D     SI1      63.1    55  2757  5.69  5.75  3.61
 53938  0.7  Very Good D     SI1      62.8    60  2757  5.66  5.68  3.56
 53939  0.86 Premium   H     SI2      61      58  2757  6.15  6.12  3.74
 53940  0.75 Ideal     D     SI2      62.2    55  2757  5.83  5.87  3.64
-# ℹ 53,930 more rows in the middle
-# ℹ Use `s_print(n = ...)` to see more rows</code></pre>
+# ℹ 53,920 more rows in the middle
+# ℹ Use `print_headtail(n = ...)` to see more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print_interval</span>(diamonds)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 53,940 × 10
+      carat cut       color clarity depth table price     x     y     z
+      &lt;dbl&gt; &lt;ord&gt;     &lt;ord&gt; &lt;ord&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+    1  0.23 Ideal     E     SI2      61.5    55   326  3.95  3.98  2.43
+ 5994  0.71 Ideal     G     VVS1     61.1    57  3955  5.76  5.8   3.53
+11987  1.09 Ideal     F     SI2      61.6    55  5143  6.59  6.65  4.08
+17981  1.7  Ideal     H     SI2      62.1    57  7273  7.68  7.63  4.75
+23974  1.53 Ideal     F     SI1      61.6    56 12109  7.39  7.34  4.54
+29967  0.31 Good      H     SI1      63.6    57   446  4.32  4.33  2.75
+35960  0.33 Very Good H     SI1      63      57   475  4.39  4.41  2.77
+41954  0.23 Very Good E     VVS2     61.6    61   505  3.92  3.97  2.43
+47947  0.71 Very Good J     SI1      63.5    58  1917  5.63  5.67  3.59
+53940  0.75 Ideal     D     SI2      62.2    55  2757  5.83  5.87  3.64
+# ℹ 53,930 more rows between the intervals
+# ℹ Use `print_interval(n = ...)` to see more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print_interval</span>(diamonds, <span class="at">n =</span> <span class="dv">20</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 53,940 × 10
+      carat cut       color clarity depth table price     x     y     z
+      &lt;dbl&gt; &lt;ord&gt;     &lt;ord&gt; &lt;ord&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+    1  0.23 Ideal     E     SI2      61.5  55     326  3.95  3.98  2.43
+ 2840  0.9  Good      G     SI2      58.4  55    3269  6.34  6.39  3.72
+ 5679  1.01 Very Good I     SI2      61.8  60    3885  6.34  6.37  3.93
+ 8518  1.04 Ideal     F     SI1      62.1  56    4426  6.54  6.47  4.04
+11357  0.99 Very Good D     SI2      62.5  57    4993  6.3   6.34  3.95
+14195  1.06 Ideal     F     SI1      62.1  57    5758  6.53  6.51  4.05
+17034  1    Ideal     F     VS2      62.6  57    6804  6.4   6.35  3.99
+19873  1.52 Premium   J     VS1      62.2  59    8426  7.32  7.38  4.57
+22712  1.53 Premium   I     VS1      62.4  59   10729  7.3   7.34  4.57
+25551  1.6  Very Good G     VS2      61    57   14383  7.55  7.59  4.62
+28390  0.33 Ideal     H     VS2      60.7  57     668  4.48  4.45  2.71
+31229  0.32 Good      D     SI1      63.6  56     756  4.37  4.34  2.77
+34068  0.3  Premium   D     VS2      62    62     851  4.27  4.24  2.64
+36907  0.42 Ideal     G     VVS2     62.3  53     961  4.83  4.86  3.02
+39746  0.53 Ideal     G     SI2      62.4  56    1093  5.18  5.14  3.22
+42584  0.52 Ideal     E     SI1      61.4  57    1330  5.15  5.18  3.17
+45423  0.55 Ideal     E     SI1      61.4  55    1668  5.29  5.26  3.24
+48262  0.53 Ideal     G     VVS2     60.8  57    1955  5.24  5.28  3.2 
+51101  0.56 Very Good G     VVS2     62.1  55.6  2336  5.29  5.31  3.29
+53940  0.75 Ideal     D     SI2      62.2  55    2757  5.83  5.87  3.64
+# ℹ 53,920 more rows between the intervals
+# ℹ Use `print_interval(n = ...)` to see more rows</code></pre>
 </div>
 </div>
 </section>
-<section id="names" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="names"><span class="header-section-number">3.2</span> <code>names()</code></h2>
+<section id="variables-和-variables_search" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="variables-和-variables_search"><span class="header-section-number">3.2</span> <code>variables()</code> 和 <code>variables_search()</code></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 罗列变量名</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(diamonds)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">variables</span>(diamonds)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 1
+   name   
+   &lt;chr&gt;  
+ 1 carat  
+ 2 cut    
+ 3 color  
+ 4 clarity
+ 5 depth  
+ 6 table  
+ 7 price  
+ 8 x      
+ 9 y      
+10 z      </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">variables</span>(lifeexp)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 2
+  name      label                   
+  &lt;chr&gt;     &lt;chr&gt;                   
+1 region    Region                  
+2 country   Country                 
+3 popgrowth Avg. annual % growth    
+4 lexp      Life expectancy at birth
+5 gnppc     GNP per capita          
+6 safewater Safe water              </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">variables_search</span>(lifeexp, <span class="st">"e"</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  name      label                   
+  &lt;chr&gt;     &lt;chr&gt;                   
+1 region    Region                  
+2 lexp      Life expectancy at birth
+3 safewater Safe water              </code></pre>
+</div>
+</div>
+</section>
+<section id="names-和-ds" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="names-和-ds"><span class="header-section-number">3.3</span> <code>names()</code> 和 <code>ds()</code></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 罗列变量名</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(diamonds)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "carat"   "cut"     "color"   "clarity" "depth"   "table"   "price"  
  [8] "x"       "y"       "z"      </code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names_as_column</span>(diamonds)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 1
+   name   
+   &lt;chr&gt;  
+ 1 carat  
+ 2 cut    
+ 3 color  
+ 4 clarity
+ 5 depth  
+ 6 table  
+ 7 price  
+ 8 x      
+ 9 y      
+10 z      </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ds</span>(diamonds, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "carat"   "cut"     "color"   "clarity" "depth"  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ds_as_column</span>(diamonds, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 1
+  name   
+  &lt;chr&gt;  
+1 carat  
+2 cut    
+3 color  
+4 clarity
+5 depth  </code></pre>
+</div>
 </div>
 </section>
-<section id="glimpse" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="glimpse"><span class="header-section-number">3.3</span> <code>glimpse()</code></h2>
+<section id="glimpse" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="glimpse"><span class="header-section-number">3.4</span> <code>glimpse()</code></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 浏览变量列表，以及开头的若干个案</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(diamonds)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 浏览变量列表，以及开头的若干个案</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(diamonds)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 53,940
 Columns: 10
@@ -391,11 +536,14 @@ $ z       &lt;dbl&gt; 2.43, 2.31, 2.31, 2.63, 2.75, 2.48, 2.47, 2.53, 2.49, 2.39
 </div>
 </div>
 </section>
-<section id="view" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="view"><span class="header-section-number">3.4</span> <code>view()</code></h2>
+<section id="view" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="view"><span class="header-section-number">3.5</span> <code>view()</code></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 打开 Excel 式的数据表</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">view</span>(diamonds)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 打开 Excel 式的数据表</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">view</span>(diamonds)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="co"># browse() 功能更强大，可以选择特定变量</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="fu">browse</span>(diamonds, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>这里因为条件的限制无法演示，就在下面贴一些截图吧。大家可以在自己的 RStudio 里面运行代码，尝试一下。</p>
 <div id="fig-view1" class="quarto-figure quarto-figure-center anchored">
@@ -417,13 +565,13 @@ $ z       &lt;dbl&gt; 2.43, 2.31, 2.31, 2.63, 2.75, 2.48, 2.47, 2.53, 2.49, 2.39
 </figure>
 </div>
 </section>
-<section id="codebook" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="codebook"><span class="header-section-number">3.5</span> <code>codebook()</code></h2>
+<section id="codebook" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="codebook"><span class="header-section-number">3.6</span> <code>codebook()</code></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(statart)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 查看变量基本信息</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">codebook</span>(diamonds)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(statart)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 查看变量基本信息</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="fu">codebook</span>(diamonds)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 4
    variable type        n unique
@@ -438,6 +586,12 @@ $ z       &lt;dbl&gt; 2.43, 2.31, 2.31, 2.63, 2.75, 2.48, 2.47, 2.53, 2.49, 2.39
  8 x        double  53940    554
  9 y        double  53940    552
 10 z        double  53940    375</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 查看变量详细信息</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">codebook_detail</span>(diamonds)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div class="tabwid"><style>.cl-cf1fde4e{}.cl-cf139b66{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-cf139b8e{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(153, 153, 153, 1.00);background-color:transparent;}.cl-cf17a422{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-cf17a42c{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-cf17c132{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cf17c133{width:1.135in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cf17c13c{width:0.752in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cf17c13d{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cf17c146{width:1.135in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cf17c147{width:0.752in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cf17c150{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cf17c15a{width:1.135in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cf17c15b{width:0.752in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cf17c15c{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cf17c164{width:1.135in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cf17c165{width:0.752in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cf17c166{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cf17c167{width:1.135in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cf17c16e{width:0.752in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cf17c16f{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cf17c178{width:1.135in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cf17c179{width:0.752in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cf17c17a{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cf17c182{width:1.135in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cf17c183{width:0.752in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cf17c184{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cf17c18c{width:1.135in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cf17c18d{width:0.752in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cf17c196{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cf17c197{width:1.135in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cf17c1a0{width:0.752in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cf17c1a1{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cf17c1a2{width:1.135in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cf17c1aa{width:0.752in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cf17c1ab{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cf17c1ac{width:1.135in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cf17c1b4{width:0.752in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cf17c1b5{width:0.922in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cf17c1be{width:1.135in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cf17c1bf{width:0.752in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-cf1fde4e"><thead><tr style="overflow-wrap:break-word;"><th class="cl-cf17c132"><p class="cl-cf17a422"><span class="cl-cf139b66">id</span></p></th><th class="cl-cf17c132"><p class="cl-cf17a422"><span class="cl-cf139b66">name</span></p></th><th class="cl-cf17c132"><p class="cl-cf17a422"><span class="cl-cf139b66">type</span></p></th><th class="cl-cf17c132"><p class="cl-cf17a422"><span class="cl-cf139b66">missings</span></p></th><th class="cl-cf17c133"><p class="cl-cf17a422"><span class="cl-cf139b66">values</span></p></th><th class="cl-cf17c132"><p class="cl-cf17a422"><span class="cl-cf139b66">n</span></p></th><th class="cl-cf17c132"><p class="cl-cf17a422"><span class="cl-cf139b66">prop</span></p></th><th class="cl-cf17c13c"><p class="cl-cf17a42c"><span class="cl-cf139b66">row_id</span></p></th></tr><tr style="overflow-wrap:break-word;"><th class="cl-cf17c13d"><p class="cl-cf17a422"><span class="cl-cf139b8e">character</span></p></th><th class="cl-cf17c13d"><p class="cl-cf17a422"><span class="cl-cf139b8e">character</span></p></th><th class="cl-cf17c13d"><p class="cl-cf17a422"><span class="cl-cf139b8e">character</span></p></th><th class="cl-cf17c13d"><p class="cl-cf17a422"><span class="cl-cf139b8e">character</span></p></th><th class="cl-cf17c146"><p class="cl-cf17a422"><span class="cl-cf139b8e">character</span></p></th><th class="cl-cf17c13d"><p class="cl-cf17a422"><span class="cl-cf139b8e">character</span></p></th><th class="cl-cf17c13d"><p class="cl-cf17a422"><span class="cl-cf139b8e">character</span></p></th><th class="cl-cf17c147"><p class="cl-cf17a42c"><span class="cl-cf139b8e">integer</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">1</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">carat</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">numeric</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">0 (0.0%)</span></p></td><td class="cl-cf17c15a"><p class="cl-cf17a422"><span class="cl-cf139b66">[0.2, 5.01]</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">53940</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c15b"><p class="cl-cf17a42c"><span class="cl-cf139b66">1</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-cf17c15c"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c15c"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c15c"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c15c"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c164"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c15c"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c15c"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c165"><p class="cl-cf17a42c"><span class="cl-cf139b66">1</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">2</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">cut</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">ordinal</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">0 (0.0%)</span></p></td><td class="cl-cf17c15a"><p class="cl-cf17a422"><span class="cl-cf139b66">Fair</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">1610</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">3.0%</span></p></td><td class="cl-cf17c15b"><p class="cl-cf17a42c"><span class="cl-cf139b66">2</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c167"><p class="cl-cf17a422"><span class="cl-cf139b66">Good</span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66">4906</span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66">9.1%</span></p></td><td class="cl-cf17c16e"><p class="cl-cf17a42c"><span class="cl-cf139b66">2</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c15a"><p class="cl-cf17a422"><span class="cl-cf139b66">Very Good</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">12082</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">22.4%</span></p></td><td class="cl-cf17c15b"><p class="cl-cf17a42c"><span class="cl-cf139b66">2</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c167"><p class="cl-cf17a422"><span class="cl-cf139b66">Premium</span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66">13791</span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66">25.6%</span></p></td><td class="cl-cf17c16e"><p class="cl-cf17a42c"><span class="cl-cf139b66">2</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c167"><p class="cl-cf17a422"><span class="cl-cf139b66">Ideal</span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66">21551</span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66">40.0%</span></p></td><td class="cl-cf17c16e"><p class="cl-cf17a42c"><span class="cl-cf139b66">2</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-cf17c15c"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c15c"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c15c"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c15c"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c164"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c15c"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c15c"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c165"><p class="cl-cf17a42c"><span class="cl-cf139b66">2</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">3</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">color</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">ordinal</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">0 (0.0%)</span></p></td><td class="cl-cf17c15a"><p class="cl-cf17a422"><span class="cl-cf139b66">D</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">6775</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">12.6%</span></p></td><td class="cl-cf17c15b"><p class="cl-cf17a42c"><span class="cl-cf139b66">3</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c167"><p class="cl-cf17a422"><span class="cl-cf139b66">E</span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66">9797</span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66">18.2%</span></p></td><td class="cl-cf17c16e"><p class="cl-cf17a42c"><span class="cl-cf139b66">3</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c167"><p class="cl-cf17a422"><span class="cl-cf139b66">F</span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66">9542</span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66">17.7%</span></p></td><td class="cl-cf17c16e"><p class="cl-cf17a42c"><span class="cl-cf139b66">3</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c167"><p class="cl-cf17a422"><span class="cl-cf139b66">G</span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66">11292</span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66">20.9%</span></p></td><td class="cl-cf17c16e"><p class="cl-cf17a42c"><span class="cl-cf139b66">3</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c167"><p class="cl-cf17a422"><span class="cl-cf139b66">H</span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66">8304</span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66">15.4%</span></p></td><td class="cl-cf17c16e"><p class="cl-cf17a42c"><span class="cl-cf139b66">3</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c167"><p class="cl-cf17a422"><span class="cl-cf139b66">I</span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66">5422</span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66">10.1%</span></p></td><td class="cl-cf17c16e"><p class="cl-cf17a42c"><span class="cl-cf139b66">3</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c167"><p class="cl-cf17a422"><span class="cl-cf139b66">J</span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66">2808</span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66">5.2%</span></p></td><td class="cl-cf17c16e"><p class="cl-cf17a42c"><span class="cl-cf139b66">3</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-cf17c16f"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c16f"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c16f"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c16f"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c178"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c16f"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c16f"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c179"><p class="cl-cf17a42c"><span class="cl-cf139b66">3</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">4</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">clarity</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">ordinal</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">0 (0.0%)</span></p></td><td class="cl-cf17c15a"><p class="cl-cf17a422"><span class="cl-cf139b66">I1</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">741</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">1.4%</span></p></td><td class="cl-cf17c15b"><p class="cl-cf17a42c"><span class="cl-cf139b66">4</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c167"><p class="cl-cf17a422"><span class="cl-cf139b66">SI2</span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66">9194</span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66">17.0%</span></p></td><td class="cl-cf17c16e"><p class="cl-cf17a42c"><span class="cl-cf139b66">4</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c167"><p class="cl-cf17a422"><span class="cl-cf139b66">SI1</span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66">13065</span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66">24.2%</span></p></td><td class="cl-cf17c16e"><p class="cl-cf17a42c"><span class="cl-cf139b66">4</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c167"><p class="cl-cf17a422"><span class="cl-cf139b66">VS2</span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66">12258</span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66">22.7%</span></p></td><td class="cl-cf17c16e"><p class="cl-cf17a42c"><span class="cl-cf139b66">4</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c167"><p class="cl-cf17a422"><span class="cl-cf139b66">VS1</span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66">8171</span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66">15.1%</span></p></td><td class="cl-cf17c16e"><p class="cl-cf17a42c"><span class="cl-cf139b66">4</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c167"><p class="cl-cf17a422"><span class="cl-cf139b66">VVS2</span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66">5066</span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66">9.4%</span></p></td><td class="cl-cf17c16e"><p class="cl-cf17a42c"><span class="cl-cf139b66">4</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c167"><p class="cl-cf17a422"><span class="cl-cf139b66">VVS1</span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66">3655</span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66">6.8%</span></p></td><td class="cl-cf17c16e"><p class="cl-cf17a42c"><span class="cl-cf139b66">4</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c167"><p class="cl-cf17a422"><span class="cl-cf139b66">IF</span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66">1790</span></p></td><td class="cl-cf17c166"><p class="cl-cf17a422"><span class="cl-cf139b66">3.3%</span></p></td><td class="cl-cf17c16e"><p class="cl-cf17a42c"><span class="cl-cf139b66">4</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-cf17c17a"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c17a"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c17a"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c17a"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c182"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c17a"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c17a"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c183"><p class="cl-cf17a42c"><span class="cl-cf139b66">4</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">5</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">depth</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">numeric</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">0 (0.0%)</span></p></td><td class="cl-cf17c15a"><p class="cl-cf17a422"><span class="cl-cf139b66">[43, 79]</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">53940</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c15b"><p class="cl-cf17a42c"><span class="cl-cf139b66">5</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-cf17c184"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c184"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c184"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c184"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c18c"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c184"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c184"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c18d"><p class="cl-cf17a42c"><span class="cl-cf139b66">5</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">6</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">table</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">numeric</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">0 (0.0%)</span></p></td><td class="cl-cf17c15a"><p class="cl-cf17a422"><span class="cl-cf139b66">[43, 95]</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">53940</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c15b"><p class="cl-cf17a42c"><span class="cl-cf139b66">6</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-cf17c196"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c196"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c196"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c196"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c197"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c196"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c196"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c1a0"><p class="cl-cf17a42c"><span class="cl-cf139b66">6</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">7</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">price</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">integer</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">0 (0.0%)</span></p></td><td class="cl-cf17c15a"><p class="cl-cf17a422"><span class="cl-cf139b66">[326, 18823]</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">53940</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c15b"><p class="cl-cf17a42c"><span class="cl-cf139b66">7</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-cf17c1a1"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c1a1"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c1a1"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c1a1"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c1a2"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c1a1"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c1a1"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c1aa"><p class="cl-cf17a42c"><span class="cl-cf139b66">7</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">8</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">x</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">numeric</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">0 (0.0%)</span></p></td><td class="cl-cf17c15a"><p class="cl-cf17a422"><span class="cl-cf139b66">[0, 10.74]</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">53940</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c15b"><p class="cl-cf17a42c"><span class="cl-cf139b66">8</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-cf17c196"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c196"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c196"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c196"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c197"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c196"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c196"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c1a0"><p class="cl-cf17a42c"><span class="cl-cf139b66">8</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">9</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">y</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">numeric</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">0 (0.0%)</span></p></td><td class="cl-cf17c15a"><p class="cl-cf17a422"><span class="cl-cf139b66">[0, 58.9]</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">53940</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c15b"><p class="cl-cf17a42c"><span class="cl-cf139b66">9</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-cf17c196"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c196"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c196"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c196"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c197"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c196"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c196"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c1a0"><p class="cl-cf17a42c"><span class="cl-cf139b66">9</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">10</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">z</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">numeric</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">0 (0.0%)</span></p></td><td class="cl-cf17c15a"><p class="cl-cf17a422"><span class="cl-cf139b66">[0, 31.8]</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66">53940</span></p></td><td class="cl-cf17c150"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c15b"><p class="cl-cf17a42c"><span class="cl-cf139b66">10</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-cf17c1ab"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c1ab"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c1ab"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c1ab"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c1ac"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c1ab"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c1ab"><p class="cl-cf17a422"><span class="cl-cf139b66"></span></p></td><td class="cl-cf17c1b4"><p class="cl-cf17a42c"><span class="cl-cf139b66">10</span></p></td></tr></tbody><tfoot><tr style="overflow-wrap:break-word;"><td colspan="8" class="cl-cf17c1b5"><p class="cl-cf17a422"><span class="cl-cf139b66">n: 37</span></p></td></tr></tfoot></table></div>
 </div>
 </div>
 

@@ -31,3 +31,6 @@ number-sections: true
 9.  8月13日 使用 sf 和 stars 等处理空间数据及可视化
 10. 如有时间：使用 officer 等自动编辑文档
 11. 如有时间：使用 tidygraph 和 ggraph 处理网络数据
+
+本网站和本工作坊的所有资料均免费开放，采用 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/) 许可协议进行许可。未经允许，不得用作任何商业用途。
+

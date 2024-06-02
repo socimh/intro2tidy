@@ -40,7 +40,6 @@ diamonds # 示例数据
 #| warning: false
 
 relocate(diamonds, price) # 把price变量提到最前，其余顺序不变
-
 ```
 
 ## `.before` 和 `.after`
@@ -51,7 +50,6 @@ relocate(diamonds, price) # 把price变量提到最前，其余顺序不变
 
 relocate(diamonds, price, .before = cut) # 把price提到cut之前，其余顺序不变
 relocate(diamonds, price, .after = cut) # 把price提到cut之后，其余顺序不变
-
 ```
 
 ## `arrange()`
@@ -76,5 +74,4 @@ relocate(diamonds, price, .after = cut) # 把price提到cut之后，其余顺序
 
 arrange(diamonds, price) # 根据price变量升序（从低到高）
 arrange(diamonds, -price) # 根据price变量降序（从高到低）
-
 ```

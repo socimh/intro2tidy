@@ -26,7 +26,7 @@ number-sections: true
     -   `add_column()` *手动添加变量*[（几乎不用）]{style="color:lightgray"}
 -   更改或新建行（个案）
     -   `expand()` 和 `complete()` 根据变量取值的组合扩充个案[（进阶技巧）]{style="color:gray"}
-    -   `add_row()` *手动添加变量*[（几乎不用）]{style="color:lightgray"}
+    -   `add_row()` *手动添加个案*[（几乎不用）]{style="color:lightgray"}
 
 ## `rename()`
 

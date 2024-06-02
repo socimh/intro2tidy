@@ -16,6 +16,7 @@ book:
         - dplyr-skim.qmd
         - dplyr-sort.qmd
         - dplyr-pipe.qmd
+        - dplyr-grammar.qmd
         - dplyr-select.qmd
         - dplyr-mutate.qmd
         - dplyr-stat.qmd
