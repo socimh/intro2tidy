@@ -1,0 +1,8 @@
+/.private-source/
+/.site/
+/docs/
+/_book/
+*.qmd
+*.pdf
+*.epub
+__pycache__/
